@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradeFlow — Trading Journal</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+  
+  <!-- ✅ SAHI ORDER -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+
+<div class="app-layout">
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">📈</div>
+      <div>
+        <div class="sidebar-logo-text">TradeFlow</div>
+        <div class="sidebar-logo-sub">Trading Journal</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+
+      <span class="nav-section-label">Main</span>
+
+      <a href="index.html" class="nav-item active" data-page="dashboard">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+        </svg>
+        Dashboard
+      </a>
+
+      <a href="journal.html" class="nav-item" data-page="journal">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+        Trade Journal
+        <span class="nav-badge">12</span>
+      </a>
+
+      <a href="analytics.html" class="nav-item" data-page="analytics">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+        Analytics
+      </a>
+
+      <a href="#" class="nav-item" data-page="calendar">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        Calendar
+      </a>
+
+      <span class="nav-section-label" style="margin-top: var(--sp-4)">Tools</span>
+
+      <a href="#" class="nav-item" data-page="playbook">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+        </svg>
+        Playbook
+      </a>
+
+      <a href="#" class="nav-item" data-page="watchlist">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+        Watchlist
+      </a>
+
+      <a href="#" class="nav-item" data-page="risk">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        Risk Manager
+      </a>
+
+      <span class="nav-section-label" style="margin-top: var(--sp-4)">Account</span>
+
+      <a href="settings.html" class="nav-item" data-page="settings">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+        </svg>
+        Settings
+      </a>
+
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar">AK</div>
+        <div class="user-info">
+          <div class="user-name">Ali Khan</div>
+          <div class="user-plan">✦ Pro Plan</div>
+        </div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--clr-text-muted)">
+          <circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>
+        </svg>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- ═══ MAIN CONTENT ═══ -->
+  <div class="app-content">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div>
+          <div class="page-title">Dashboard</div>
+          <div class="page-subtitle">Welcome back, Ali 👋</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="search-bar">
+          <span class="search-icon">🔍</span>
+          <input type="text" class="search-input" placeholder="Search trades...">
+        </div>
+        <div class="topbar-divider"></div>
+        <div class="topbar-btn tooltip" data-tip="Notifications" style="position:relative">
+          🔔
+          <span class="notif-dot"></span>
+        </div>
+        <div class="topbar-btn tooltip" data-tip="Theme">🌙</div>
+        <button class="btn btn-primary btn-sm" onclick="document.getElementById('addTradeModal').classList.add('open')">
+          + New Trade
+        </button>
+      </div>
+    </header>
+
+    <!-- PAGE CONTENT -->
+    <main class="page-content">
+
+      <!-- STAT CARDS -->
+      <div class="dashboard-stats">
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon purple">💰</div>
+            <span class="stat-card-change up">+12.4%</span>
+          </div>
+          <div class="stat-card-value" style="color: var(--clr-profit)">$8,420</div>
+          <div class="stat-card-label">Total P&L (Month)</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon teal">🎯</div>
+            <span class="stat-card-change up">+3%</span>
+          </div>
+          <div class="stat-card-value">68%</div>
+          <div class="stat-card-label">Win Rate</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon orange">📊</div>
+            <span class="stat-card-change down">-0.2</span>
+          </div>
+          <div class="stat-card-value">2.4</div>
+          <div class="stat-card-label">Profit Factor</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon red">⚡</div>
+            <span class="stat-card-change up">+5</span>
+          </div>
+          <div class="stat-card-value">47</div>
+          <div class="stat-card-label">Total Trades</div>
+        </div>
+
+      </div>
+
+      <!-- MAIN GRID -->
+      <div class="dashboard-main">
+
+        <!-- EQUITY CURVE -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Equity Curve</div>
+              <div class="card-subtitle">Cumulative P&L over time</div>
+            </div>
+            <div class="tabs">
+              <div class="tab-item active">1W</div>
+              <div class="tab-item">1M</div>
+              <div class="tab-item">3M</div>
+              <div class="tab-item">All</div>
+            </div>
+          </div>
+          <div class="equity-chart-wrap">
+            <svg class="chart-line-svg" viewBox="0 0 600 200" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%"   stop-color="#6C63FF" stop-opacity="0.3"/>
+                  <stop offset="100%" stop-color="#6C63FF" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,180 C30,160 60,140 100,120 C140,100 160,130 200,110 C240,90 260,60 300,50 C340,40 360,70 400,55 C440,40 460,20 500,15 C530,10 570,20 600,10"
+                fill="none" stroke="#6C63FF" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M0,180 C30,160 60,140 100,120 C140,100 160,130 200,110 C240,90 260,60 300,50 C340,40 360,70 400,55 C440,40 460,20 500,15 C530,10 570,20 600,10 L600,200 L0,200 Z"
+                fill="url(#lineGrad)"/>
+              <circle cx="100" cy="120" r="4" fill="#6C63FF" opacity="0.6"/>
+              <circle cx="300" cy="50"  r="4" fill="#6C63FF" opacity="0.6"/>
+              <circle cx="500" cy="15"  r="5" fill="#00D4AA"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- WIN RATE -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Win Rate</div>
+              <div class="card-subtitle">This month</div>
+            </div>
+          </div>
+          <div class="win-rate-circle">
+            <div class="circle-chart">
+              <svg viewBox="0 0 120 120" width="140" height="140">
+                <defs>
+                  <linearGradient id="circleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%"   stop-color="#6C63FF"/>
+                    <stop offset="100%" stop-color="#00D4AA"/>
+                  </linearGradient>
+                </defs>
+                <circle class="circle-bg" cx="60" cy="60" r="54"/>
+                <circle class="circle-fill" cx="60" cy="60" r="54"/>
+              </svg>
+              <div class="circle-text">
+                <span class="circle-value">68%</span>
+                <span class="circle-label">Win Rate</span>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);width:100%;margin-top:var(--sp-2)">
+              <div style="text-align:center;padding:var(--sp-3);background:rgba(0,212,170,0.08);border-radius:var(--radius-md)">
+                <div style="font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--clr-profit);font-family:var(--font-mono)">32</div>
+                <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Wins</div>
+              </div>
+              <div style="text-align:center;padding:var(--sp-3);background:rgba(255,71,87,0.08);border-radius:var(--radius-md)">
+                <div style="font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--clr-loss);font-family:var(--font-mono)">15</div>
+                <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Losses</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- BOTTOM GRID -->
+      <div class="dashboard-bottom">
+
+        <!-- RECENT TRADES -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Recent Trades</div>
+              <div class="card-subtitle">Last 5 trades</div>
+            </div>
+            <a href="journal.html" class="btn btn-ghost btn-sm">View All →</a>
+          </div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Symbol</th>
+                  <th>Type</th>
+                  <th>Entry</th>
+                  <th>P&L</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="trade-row-symbol">
+                      <div class="symbol-icon">BTC</div>
+                      <div>
+                        <div style="font-weight:var(--fw-semibold)">BTC/USDT</div>
+                        <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Crypto</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-profit">LONG</span></td>
+                  <td class="td-mono">$42,100</td>
+                  <td class="td-mono" style="color:var(--clr-profit)">+$1,240</td>
+                  <td><span class="badge badge-profit">Win</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="trade-row-symbol">
+                      <div class="symbol-icon" style="background:rgba(255,71,87,0.1);color:var(--clr-loss)">ETH</div>
+                      <div>
+                        <div style="font-weight:var(--fw-semibold)">ETH/USDT</div>
+                        <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Crypto</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-loss">SHORT</span></td>
+                  <td class="td-mono">$2,280</td>
+                  <td class="td-mono" style="color:var(--clr-loss)">-$320</td>
+                  <td><span class="badge badge-loss">Loss</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="trade-row-symbol">
+                      <div class="symbol-icon">AAPL</div>
+                      <div>
+                        <div style="font-weight:var(--fw-semibold)">AAPL</div>
+                        <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Stocks</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-profit">LONG</span></td>
+                  <td class="td-mono">$178.50</td>
+                  <td class="td-mono" style="color:var(--clr-profit)">+$890</td>
+                  <td><span class="badge badge-profit">Win</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="trade-row-symbol">
+                      <div class="symbol-icon">EUR</div>
+                      <div>
+                        <div style="font-weight:var(--fw-semibold)">EUR/USD</div>
+                        <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Forex</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-profit">LONG</span></td>
+                  <td class="td-mono">1.0892</td>
+                  <td class="td-mono" style="color:var(--clr-profit)">+$450</td>
+                  <td><span class="badge badge-profit">Win</span></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="trade-row-symbol">
+                      <div class="symbol-icon" style="background:rgba(255,179,71,0.1);color:var(--clr-warning)">GLD</div>
+                      <div>
+                        <div style="font-weight:var(--fw-semibold)">GOLD</div>
+                        <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Commodity</div>
+                      </div>
+                    </div>
+                  </td>
+                  <td><span class="badge badge-loss">SHORT</span></td>
+                  <td class="td-mono">$1,982</td>
+                  <td class="td-mono" style="color:var(--clr-text-muted)">$0</td>
+                  <td><span class="badge badge-neutral">B/E</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- DAILY PERFORMANCE BARS -->
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Daily Performance</div>
+              <div class="card-subtitle">Last 14 days</div>
+            </div>
+          </div>
+          <div class="mini-bars" style="height:120px;align-items:flex-end;padding:0 var(--sp-2)">
+            <div class="mini-bar profit" style="height:60%"></div>
+            <div class="mini-bar loss"   style="height:30%"></div>
+            <div class="mini-bar profit" style="height:80%"></div>
+            <div class="mini-bar profit" style="height:45%"></div>
+            <div class="mini-bar loss"   style="height:25%"></div>
+            <div class="mini-bar profit" style="height:90%"></div>
+            <div class="mini-bar profit" style="height:70%"></div>
+            <div class="mini-bar loss"   style="height:40%"></div>
+            <div class="mini-bar profit" style="height:55%"></div>
+            <div class="mini-bar profit" style="height:85%"></div>
+            <div class="mini-bar loss"   style="height:20%"></div>
+            <div class="mini-bar profit" style="height:75%"></div>
+            <div class="mini-bar profit" style="height:95%"></div>
+            <div class="mini-bar loss"   style="height:35%"></div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-3);margin-top:var(--sp-5)">
+            <div style="text-align:center">
+              <div style="font-size:var(--fs-lg);font-weight:var(--fw-bold);font-family:var(--font-mono);color:var(--clr-profit)">2.4</div>
+              <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Avg R:R</div>
+            </div>
+            <div style="text-align:center">
+              <div style="font-size:var(--fs-lg);font-weight:var(--fw-bold);font-family:var(--font-mono)">$178</div>
+              <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Avg Win</div>
+            </div>
+            <div style="text-align:center">
+              <div style="font-size:var(--fs-lg);font-weight:var(--fw-bold);font-family:var(--font-mono);color:var(--clr-loss)">$74</div>
+              <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Avg Loss</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+</div>
+
+<!-- ═══ ADD TRADE MODAL ═══ -->
+<div class="modal-overlay" id="addTradeModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">➕ Add New Trade</div>
+      <div class="modal-close" onclick="document.getElementById('addTradeModal').classList.remove('open')">✕</div>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;flex-direction:column;gap:var(--sp-5)">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Symbol <span>*</span></label>
+            <input type="text" class="form-input" placeholder="e.g. BTC/USDT">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Market</label>
+            <select class="form-select">
+              <option>Crypto</option>
+              <option>Forex</option>
+              <option>Stocks</option>
+              <option>Futures</option>
+              <option>Commodity</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Trade Type</label>
+            <select class="form-select">
+              <option>Long</option>
+              <option>Short</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Date & Time</label>
+            <input type="datetime-local" class="form-input">
+          </div>
+        </div>
+
+        <div class="form-row-3">
+          <div class="form-group">
+            <label class="form-label">Entry Price <span>*</span></label>
+            <input type="number" class="form-input" placeholder="0.00">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Exit Price</label>
+            <input type="number" class="form-input" placeholder="0.00">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Position Size</label>
+            <input type="number" class="form-input" placeholder="0.00">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Stop Loss</label>
+            <input type="number" class="form-input" placeholder="0.00">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Take Profit</label>
+            <input type="number" class="form-input" placeholder="0.00">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Strategy</label>
+            <select class="form-select">
+              <option>Breakout</option>
+              <option>Trend Follow</option>
+              <option>Mean Reversion</option>
+              <option>Scalping</option>
+              <option>Swing</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Outcome</label>
+            <select class="form-select">
+              <option>Open</option>
+              <option>Win</option>
+              <option>Loss</option>
+              <option>Break Even</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Trade Notes</label>
+          <textarea class="form-textarea" placeholder="Setup analysis, entry reason, market conditions..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Emotion Rating</label>
+          <div style="display:flex;gap:var(--sp-2)">
+            <span style="font-size:1.5rem;cursor:pointer;filter:grayscale(0.5)" title="Fearful">😰</span>
+            <span style="font-size:1.5rem;cursor:pointer;filter:grayscale(0.5)" title="Uncertain">😟</span>
+            <span style="font-size:1.5rem;cursor:pointer" title="Neutral">😐</span>
+            <span style="font-size:1.5rem;cursor:pointer;filter:grayscale(0.5)" title="Confident">😊</span>
+            <span style="font-size:1.5rem;cursor:pointer;filter:grayscale(0.5)" title="FOMO">🤑</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="document.getElementById('addTradeModal').classList.remove('open')">Cancel</button>
+      <button class="btn btn-primary">Save Trade</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/trades.js"></script>
+<script src="js/charts.js"></script>
+</body>
+</html>

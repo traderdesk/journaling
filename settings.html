@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradeLog — Settings</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+          <polyline points="16 7 22 7 22 13"/>
+        </svg>
+      </div>
+      <span class="sidebar-logo-text">Trade<span>Log</span></span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Main</div>
+      <a href="index.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+          <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+        </svg>
+        <span class="nav-item-label">Dashboard</span>
+      </a>
+      <a href="journal.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+        </svg>
+        <span class="nav-item-label">Trade Journal</span>
+      </a>
+      <a href="analytics.html" class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="20" x2="18" y2="10"/>
+          <line x1="12" y1="20" x2="12" y2="4"/>
+          <line x1="6"  y1="20" x2="6"  y2="14"/>
+        </svg>
+        <span class="nav-item-label">Analytics</span>
+      </a>
+      <a href="settings.html" class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06-.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        <span class="nav-item-label">Settings</span>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="sidebar-collapse-btn" id="collapseBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        <span class="nav-item-label">Collapse</span>
+      </button>
+    </div>
+  </aside>
+
+  <div class="main-content">
+    <header class="topbar">
+      <div class="topbar-title">Settings <span>/ Preferences</span></div>
+      <div class="topbar-actions">
+        <div class="topbar-avatar">JD</div>
+      </div>
+    </header>
+
+    <main class="page-content">
+      <div class="page-header">
+        <div class="page-header-left">
+          <h1>Settings</h1>
+          <p>Manage your account, preferences and data.</p>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:220px 1fr;gap:var(--sp-lg)">
+
+        <!-- SETTINGS NAV ── -->
+        <div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <button class="nav-item active" onclick="showSettingsSection('profile', this)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+              <span class="nav-item-label">Profile</span>
+            </button>
+            <button class="nav-item" onclick="showSettingsSection('trading', this)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px">
+                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+              </svg>
+              <span class="nav-item-label">Trading</span>
+            </button>
+            <button class="nav-item" onclick="showSettingsSection('notifications', this)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+              </svg>
+              <span class="nav-item-label">Notifications</span>
+            </button>
+            <button class="nav-item" onclick="showSettingsSection('data', this)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px">
+                <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+              </svg>
+              <span class="nav-item-label">Data & Export</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- SETTINGS CONTENT ── -->
+        <div>
+
+          <!-- PROFILE ── -->
+          <div id="section-profile">
+            <div class="card" style="margin-bottom:var(--sp-md)">
+              <div class="card-title" style="margin-bottom:var(--sp-lg)">Profile Information</div>
+              <div style="display:flex;align-items:center;gap:var(--sp-lg);margin-bottom:var(--sp-lg)">
+                <div style="width:72px;height:72px;border-radius:var(--r-xl);background:linear-gradient(135deg,var(--clr-accent),#9B8FFF);display:flex;align-items:center;justify-content:center;font-size:var(--fs-2xl);font-weight:800;color:#fff;flex-shrink:0">JD</div>
+                <div>
+                  <button class="btn btn-secondary btn-sm">Change Avatar</button>
+                  <div style="font-size:var(--fs-xs);color:var(--clr-text-muted);margin-top:6px">PNG, JPG up to 2MB</div>
+                </div>
+              </div>
+              <div class="form-row" style="margin-bottom:var(--sp-md)">
+                <div class="form-group">
+                  <label class="form-label">First Name</label>
+                  <input type="text" class="form-input" value="John">
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Last Name</label>
+                  <input type="text" class="form-input" value="Doe">
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom:var(--sp-md)">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-input" value="john@tradelog.app">
+              </div>
+              <div class="form-group" style="margin-bottom:var(--sp-lg)">
+                <label class="form-label">Timezone</label>
+                <select class="form-select">
+                  <option selected>UTC-5 (Eastern Time)</option>
+                  <option>UTC+0 (London)</option>
+                  <option>UTC+5:30 (IST)</option>
+                  <option>UTC+8 (SGT)</option>
+                </select>
+              </div>
+              <button class="btn btn-primary" onclick="showToast('success','Profile updated','Your changes have been saved.')">Save Changes</button>
+            </div>
+          </div>
+
+          <!-- TRADING ── -->
+          <div id="section-trading" style="display:none">
+            <div class="card" style="margin-bottom:var(--sp-md)">
+              <div class="card-title" style="margin-bottom:var(--sp-lg)">Trading Defaults</div>
+              <div class="form-row" style="margin-bottom:var(--sp-md)">
+                <div class="form-group">
+                  <label class="form-label">Default Account Size</label>
+                  <div class="input-group">
+                    <span class="input-addon">$</span>
+                    <input type="number" class="form-input" value="25000">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Default Risk Per Trade</label>
+                  <div class="input-group">
+                    <input type="number" class="form-input" value="1">
+                    <span class="input-addon">%</span>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom:var(--sp-md)">
+                <label class="form-label">Default Asset Type</label>
+                <select class="form-select">
+                  <option>Equity</option><option>Futures</option><option>Forex</option><option>Crypto</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin-bottom:var(--sp-lg)">
+                <label class="form-label">Currency</label>
+                <select class="form-select">
+                  <option>USD ($)</option><option>EUR (€)</option><option>GBP (£)</option><option>PKR (₨)</option>
+                </select>
+              </div>
+              <button class="btn btn-primary" onclick="showToast('success','Settings saved','Trading defaults updated.')">Save Defaults</button>
+            </div>
+
+            <div class="card">
+              <div class="card-title" style="margin-bottom:var(--sp-lg)">Strategies</div>
+              <div id="strategiesList" style="display:flex;flex-direction:column;gap:8px;margin-bottom:var(--sp-md)">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--clr-bg-elevated);border-radius:var(--r-md);border:1px solid var(--clr-border)">
+                  <span style="font-size:var(--fs-sm);font-weight:500">Breakout</span>
+                  <button class="btn btn-ghost btn-sm" style="color:var(--clr-loss)">Remove</button>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--clr-bg-elevated);border-radius:var(--r-md);border:1px solid var(--clr-border)">
+                  <span style="font-size:var(--fs-sm);font-weight:500">Trend Following</span>
+                  <button class="btn btn-ghost btn-sm" style="color:var(--clr-loss)">Remove</button>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--clr-bg-elevated);border-radius:var(--r-md);border:1px solid var(--clr-border)">
+                  <span style="font-size:var(--fs-sm);font-weight:500">Mean Reversion</span>
+                  <button class="btn btn-ghost btn-sm" style="color:var(--clr-loss)">Remove</button>
+                </div>
+              </div>
+              <div style="display:flex;gap:8px">
+                <input type="text" class="form-input" id="newStrategy" placeholder="New strategy name..." style="flex:1">
+                <button class="btn btn-secondary" onclick="addStrategy()">Add</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- NOTIFICATIONS ── -->
+          <div id="section-notifications" style="display:none">
+            <div class="card">
+              <div class="card-title" style="margin-bottom:var(--sp-lg)">Notification Preferences</div>
+              <div style="display:flex;flex-direction:column;gap:var(--sp-md)">
+
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--sp-md) 0;border-bottom:1px solid var(--clr-border)">
+                  <div>
+                    <div style="font-size:var(--fs-sm);font-weight:500">Daily Summary</div>
+                    <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">End-of-day P&L summary notification</div>
+                  </div>
+                  <label style="position:relative;width:44px;height:24px;cursor:pointer">
+                    <input type="checkbox" checked style="opacity:0;width:0;height:0;position:absolute">
+                    <div class="toggle-track" style="position:absolute;inset:0;background:var(--clr-accent);border-radius:12px;transition:background 0.2s">
+                      <div style="position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:23px;transition:left 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.3)"></div>
+                    </div>
+                  </label>
+                </div>
+
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--sp-md) 0;border-bottom:1px solid var(--clr-border)">
+                  <div>
+                    <div style="font-size:var(--fs-sm);font-weight:500">Weekly Report</div>
+                    <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Performance report every Monday</div>
+                  </div>
+                  <label style="position:relative;width:44px;height:24px;cursor:pointer">
+                    <input type="checkbox" checked style="opacity:0;width:0;height:0;position:absolute">
+                    <div class="toggle-track" style="position:absolute;inset:0;background:var(--clr-accent);border-radius:12px;transition:background 0.2s">
+                      <div style="position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:3px;left:23px;transition:left 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.3)"></div>
+                    </div>
+                  </label>
+                </div>
+
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--sp-md) 0">
+                  <div>
+                    <div style="font-size:var(--fs-sm);font-weight:500">Drawdown Alert</div>
+                    <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Alert when drawdown exceeds limit</div>
+                  </div>
+                  <label style="position:relative;width:44px;height:24px;cursor:pointer">
+                    <input type="checkbox" style="opacity:0;width:0;height:0;position:absolute">
+                    <div class="toggle-track" style="position:absolute;inset:0;background:var(--clr-bg-hover);border:1px solid var(--clr-border);border-radius:12px;transition:background 0.2s">
+                      <div style="position:absolute;width:18px;height:18px;background:var(--clr-text-muted);border-radius:50%;top:3px;left:3px;transition:left 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.3)"></div>
+                    </div>
+                  </label>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- DATA ── -->
+          <div id="section-data" style="display:none">
+            <div class="card" style="margin-bottom:var(--sp-md)">
+              <div class="card-title" style="margin-bottom:var(--sp-lg)">Export Data</div>
+              <div style="display:flex;flex-direction:column;gap:var(--sp-md)">
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--sp-md);background:var(--clr-bg-elevated);border-radius:var(--r-lg);border:1px solid var(--clr-border)">
+                  <div>
+                    <div style="font-size:var(--fs-sm);font-weight:600">Export Trades (CSV)</div>
+                    <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Download all trades as CSV file</div>
+                  </div>
+                  <button class="btn btn-secondary btn-sm" onclick="exportCSV()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="7 10 12 15 17 10"/>
+                      <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    Export CSV
+                  </button>
+                </div>
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:var(--sp-md);background:var(--clr-bg-elevated);border-radius:var(--r-lg);border:1px solid var(--clr-border)">
+                  <div>
+                    <div style="font-size:var(--fs-sm);font-weight:600">Export JSON Backup</div>
+                    <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Full data backup in JSON format</div>
+                  </div>
+                  <button class="btn btn-secondary btn-sm" onclick="exportJSON()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="7 10 12 15 17 10"/>
+                      <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    Export JSON
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card" style="border-color:rgba(255,77,109,0.3)">
+              <div class="card-title" style="margin-bottom:var(--sp-sm);color:var(--clr-loss)">Danger Zone</div>
+              <div style="font-size:var(--fs-sm);color:var(--clr-text-secondary);margin-bottom:var(--sp-lg)">
+                These actions are irreversible. Please be careful.
+              </div>
+              <button class="btn btn-loss" onclick="clearAllData()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:15px;height:15px">
+                  <polyline points="3 6 5 6 21 6"/>
+                  <path d="M19 6l-1 14H6L5 6"/>
+                  <path d="M10 11v6"/><path d="M14 11v6"/>
+                </svg>
+                Delete All Trades
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<script src="js/trades.js"></script>
+<script src="js/app.js"></script>
+<script>
+  function showSettingsSection(id, btn) {
+    ['profile','trading','notifications','data'].forEach(s => {
+      document.getElementById('section-' + s).style.display = 'none';
+    });
+    document.getElementById('section-' + id).style.display = 'block';
+
+    document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  function addStrategy() {
+    const input = document.getElementById('newStrategy');
+    const val   = input.value.trim();
+    if (!val) return;
+    const list = document.getElementById('strategiesList');
+    const item = document.createElement('div');
+    item.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:var(--clr-bg-elevated);border-radius:var(--r-md);border:1px solid var(--clr-border)';
+    item.innerHTML = `
+      <span style="font-size:var(--fs-sm);font-weight:500">${val}</span>
+      <button class="btn btn-ghost btn-sm" style="color:var(--clr-loss)" onclick="this.closest('div').remove()">Remove</button>
+    `;
+    list.appendChild(item);
+    input.value = '';
+    showToast('success', 'Strategy added', val + ' has been added.');
+  }
+
+  function exportCSV() {
+    const trades = TradesDB.getAll();
+    const headers = ['ID','Symbol','Asset','Direction','Strategy','Entry','Exit','Stop','Size','EntryDate','ExitDate','PnL','Notes'];
+    const rows = trades.map(t => [
+      t.id, t.symbol, t.asset, t.direction, t.strategy||'',
+      t.entryPrice, t.exitPrice||'', t.stopLoss||'', t.size,
+      t.entryDate, t.exitDate||'',
+      TradesDB.calcPnL(t)||'',
+      '"' + (t.notes||'').replace(/"/g,'""') + '"'
+    ]);
+    const csv = [headers, ...rows].map(r => r.join(',')).join('\n');
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'tradelog_export.csv';
+    a.click();
+    showToast('success', 'Export ready', 'CSV file has been downloaded.');
+  }
+
+  function exportJSON() {
+    const data = JSON.stringify(TradesDB.getAll(), null, 2);
+    const blob = new Blob([data], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'tradelog_backup.json';
+    a.click();
+    showToast('success', 'Backup ready', 'JSON backup downloaded.');
+  }
+
+  function clearAllData() {
+    if (!confirm('DELETE ALL TRADES? This cannot be undone!')) return;
+    localStorage.removeItem('tradelog_trades');
+    showToast('info', 'Data cleared', 'All trades have been deleted.');
+  }
+</script>
+</body>
+</html>
