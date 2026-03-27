@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TradeFlow — Calendar</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    /* ── CALENDAR SPECIFIC ── */
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 1px;
+      background: var(--clr-border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+    }
+    .cal-day-header {
+      background: var(--clr-surface-2);
+      padding: var(--sp-3);
+      text-align: center;
+      font-size: var(--fs-xs);
+      font-weight: var(--fw-semibold);
+      color: var(--clr-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .cal-day {
+      background: var(--clr-surface);
+      padding: var(--sp-3);
+      min-height: 90px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .cal-day:hover { background: var(--clr-surface-2); }
+    .cal-day.other-month { opacity: 0.35; }
+    .cal-day.today {
+      background: rgba(108,99,255,0.08);
+      box-shadow: inset 0 0 0 1.5px var(--clr-accent-purple);
+    }
+    .cal-day-num {
+      font-size: var(--fs-sm);
+      font-weight: var(--fw-semibold);
+      color: var(--clr-text-muted);
+      margin-bottom: var(--sp-2);
+    }
+    .cal-day.today .cal-day-num {
+      color: var(--clr-accent-purple);
+    }
+    .cal-pnl {
+      font-size: var(--fs-xs);
+      font-weight: var(--fw-bold);
+      font-family: var(--font-mono);
+      margin-bottom: var(--sp-1);
+    }
+    .cal-pnl.profit { color: var(--clr-profit); }
+    .cal-pnl.loss   { color: var(--clr-loss); }
+    .cal-trades-count {
+      font-size: 10px;
+      color: var(--clr-text-muted);
+    }
+    .cal-dot {
+      position: absolute;
+      bottom: var(--sp-2);
+      right: var(--sp-2);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+    .cal-dot.profit { background: var(--clr-profit); }
+    .cal-dot.loss   { background: var(--clr-loss); }
+    .cal-dot.neutral { background: var(--clr-text-muted); }
+
+    .cal-nav {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-4);
+    }
+    .cal-nav-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      background: var(--clr-surface-2);
+      border: 1px solid var(--clr-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: var(--fs-base);
+      transition: background 0.15s;
+    }
+    .cal-nav-btn:hover { background: var(--clr-surface-3, var(--clr-border)); }
+    .cal-month-label {
+      font-size: var(--fs-lg);
+      font-weight: var(--fw-bold);
+      min-width: 160px;
+      text-align: center;
+    }
+
+    .day-detail {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+    }
+    .day-trade-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--sp-3);
+      background: var(--clr-surface-2);
+      border-radius: var(--radius-md);
+      font-size: var(--fs-sm);
+    }
+  </style>
+</head>
+<body>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+
+<div class="app-layout">
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">📈</div>
+      <div>
+        <div class="sidebar-logo-text">TradeFlow</div>
+        <div class="sidebar-logo-sub">Trading Journal</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <span class="nav-section-label">Main</span>
+
+      <a href="index.html" class="nav-item" data-page="dashboard">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+        </svg>
+        Dashboard
+      </a>
+
+      <a href="journal.html" class="nav-item" data-page="journal">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+        </svg>
+        Trade Journal
+        <span class="nav-badge">12</span>
+      </a>
+
+      <a href="analytics.html" class="nav-item" data-page="analytics">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+        Analytics
+      </a>
+
+      <a href="calendar.html" class="nav-item active" data-page="calendar">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/>
+          <line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        Calendar
+      </a>
+
+      <span class="nav-section-label" style="margin-top: var(--sp-4)">Tools</span>
+
+      <a href="playbook.html" class="nav-item" data-page="playbook">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+        </svg>
+        Playbook
+      </a>
+
+      <a href="#" class="nav-item" data-page="watchlist">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+        Watchlist
+      </a>
+
+      <a href="#" class="nav-item" data-page="risk">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        Risk Manager
+      </a>
+
+      <span class="nav-section-label" style="margin-top: var(--sp-4)">Account</span>
+
+      <a href="settings.html" class="nav-item" data-page="settings">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
+        </svg>
+        Settings
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar">AK</div>
+        <div class="user-info">
+          <div class="user-name">Ali Khan</div>
+          <div class="user-plan">✦ Pro Plan</div>
+        </div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--clr-text-muted)">
+          <circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>
+        </svg>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══ MAIN CONTENT ═══ -->
+  <div class="app-content">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <div>
+          <div class="page-title">Calendar</div>
+          <div class="page-subtitle">Track your daily trading performance 📅</div>
+        </div>
+      </div>
+      <div class="topbar-right">
+        <div class="topbar-divider"></div>
+        <button class="btn btn-ghost btn-sm">Today</button>
+        <button class="btn btn-primary btn-sm" onclick="document.getElementById('addTradeModal').classList.add('open')">
+          + New Trade
+        </button>
+      </div>
+    </header>
+
+    <!-- PAGE CONTENT -->
+    <main class="page-content">
+
+      <!-- MONTHLY STATS -->
+      <div class="dashboard-stats">
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon purple">📅</div>
+          </div>
+          <div class="stat-card-value" style="color:var(--clr-profit)">18</div>
+          <div class="stat-card-label">Green Days</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon red">📉</div>
+          </div>
+          <div class="stat-card-value" style="color:var(--clr-loss)">6</div>
+          <div class="stat-card-label">Red Days</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon teal">💰</div>
+            <span class="stat-card-change up">+12.4%</span>
+          </div>
+          <div class="stat-card-value" style="color:var(--clr-profit)">$8,420</div>
+          <div class="stat-card-label">Month P&L</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon orange">🔥</div>
+          </div>
+          <div class="stat-card-value">5</div>
+          <div class="stat-card-label">Win Streak</div>
+        </div>
+      </div>
+
+      <!-- CALENDAR + SIDEBAR -->
+      <div style="display:grid;grid-template-columns:1fr 300px;gap:var(--sp-5);align-items:start">
+
+        <!-- CALENDAR -->
+        <div class="card">
+          <!-- Nav -->
+          <div class="card-header" style="margin-bottom:var(--sp-5)">
+            <div class="cal-nav">
+              <div class="cal-nav-btn" id="prevMonth">‹</div>
+              <div class="cal-month-label" id="monthLabel">March 2026</div>
+              <div class="cal-nav-btn" id="nextMonth">›</div>
+            </div>
+            <div style="display:flex;gap:var(--sp-3);align-items:center;font-size:var(--fs-xs);color:var(--clr-text-muted)">
+              <div style="display:flex;align-items:center;gap:var(--sp-1)"><div style="width:8px;height:8px;border-radius:50%;background:var(--clr-profit)"></div> Profit</div>
+              <div style="display:flex;align-items:center;gap:var(--sp-1)"><div style="width:8px;height:8px;border-radius:50%;background:var(--clr-loss)"></div> Loss</div>
+              <div style="display:flex;align-items:center;gap:var(--sp-1)"><div style="width:8px;height:8px;border-radius:50%;background:var(--clr-text-muted)"></div> B/E</div>
+            </div>
+          </div>
+
+          <!-- Day Headers -->
+          <div class="cal-grid" id="calGrid">
+            <div class="cal-day-header">Mon</div>
+            <div class="cal-day-header">Tue</div>
+            <div class="cal-day-header">Wed</div>
+            <div class="cal-day-header">Thu</div>
+            <div class="cal-day-header">Fri</div>
+            <div class="cal-day-header">Sat</div>
+            <div class="cal-day-header">Sun</div>
+          </div>
+        </div>
+
+        <!-- DAY DETAIL PANEL -->
+        <div class="card" id="dayDetailPanel">
+          <div class="card-header">
+            <div>
+              <div class="card-title" id="selectedDateLabel">Select a Day</div>
+              <div class="card-subtitle">Daily trade summary</div>
+            </div>
+          </div>
+          <div class="day-detail" id="dayDetailContent">
+            <div style="text-align:center;padding:var(--sp-8);color:var(--clr-text-muted)">
+              <div style="font-size:2rem;margin-bottom:var(--sp-3)">📅</div>
+              <div style="font-size:var(--fs-sm)">Click a day to see trades</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- MONTHLY HEATMAP STRIP -->
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Monthly P&L Heatmap</div>
+            <div class="card-subtitle">Daily performance at a glance</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:4px;flex-wrap:wrap">
+          <!-- JS will fill this -->
+          <div id="heatmapStrip" style="display:flex;gap:4px;flex-wrap:wrap;width:100%"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;margin-top:var(--sp-3);font-size:var(--fs-xs);color:var(--clr-text-muted)">
+          <span>Loss</span>
+          <div style="display:flex;gap:3px;align-items:center">
+            <div style="width:14px;height:14px;border-radius:2px;background:rgba(255,71,87,0.8)"></div>
+            <div style="width:14px;height:14px;border-radius:2px;background:rgba(255,71,87,0.4)"></div>
+            <div style="width:14px;height:14px;border-radius:2px;background:var(--clr-surface-2)"></div>
+            <div style="width:14px;height:14px;border-radius:2px;background:rgba(0,212,170,0.4)"></div>
+            <div style="width:14px;height:14px;border-radius:2px;background:rgba(0,212,170,0.8)"></div>
+          </div>
+          <span>Profit</span>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ADD TRADE MODAL (same as index) -->
+<div class="modal-overlay" id="addTradeModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">➕ Add New Trade</div>
+      <div class="modal-close" onclick="document.getElementById('addTradeModal').classList.remove('open')">✕</div>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;flex-direction:column;gap:var(--sp-5)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Symbol <span>*</span></label>
+            <input type="text" class="form-input" placeholder="e.g. BTC/USDT">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Market</label>
+            <select class="form-select">
+              <option>Crypto</option><option>Forex</option>
+              <option>Stocks</option><option>Futures</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Entry Price <span>*</span></label>
+            <input type="number" class="form-input" placeholder="0.00">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Exit Price</label>
+            <input type="number" class="form-input" placeholder="0.00">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Trade Notes</label>
+          <textarea class="form-textarea" placeholder="Setup analysis..."></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="document.getElementById('addTradeModal').classList.remove('open')">Cancel</button>
+      <button class="btn btn-primary">Save Trade</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── CALENDAR ENGINE ──
+const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+// Sample trade data
+const tradeData = {
+  '2026-03-03': { pnl: +840,  trades: 2, type: 'profit' },
+  '2026-03-04': { pnl: -320,  trades: 1, type: 'loss'   },
+  '2026-03-05': { pnl: +1200, trades: 3, type: 'profit' },
+  '2026-03-06': { pnl: +450,  trades: 2, type: 'profit' },
+  '2026-03-09': { pnl: -180,  trades: 1, type: 'loss'   },
+  '2026-03-10': { pnl: +670,  trades: 2, type: 'profit' },
+  '2026-03-11': { pnl: +890,  trades: 3, type: 'profit' },
+  '2026-03-12': { pnl: -240,  trades: 1, type: 'loss'   },
+  '2026-03-13': { pnl: +1100, trades: 4, type: 'profit' },
+  '2026-03-16': { pnl: +560,  trades: 2, type: 'profit' },
+  '2026-03-17': { pnl: -90,   trades: 1, type: 'loss'   },
+  '2026-03-18': { pnl: +780,  trades: 3, type: 'profit' },
+  '2026-03-19': { pnl: +340,  trades: 2, type: 'profit' },
+  '2026-03-20': { pnl: 0,     trades: 1, type: 'neutral'},
+  '2026-03-23': { pnl: +920,  trades: 3, type: 'profit' },
+  '2026-03-24': { pnl: -410,  trades: 2, type: 'loss'   },
+  '2026-03-25': { pnl: +650,  trades: 2, type: 'profit' },
+  '2026-03-26': { pnl: +1340, trades: 4, type: 'profit' },
+  '2026-03-27': { pnl: +480,  trades: 2, type: 'profit' },
+};
+
+let currentDate = new Date(2026, 2, 1); // March 2026
+
+function pad(n){ return String(n).padStart(2,'0'); }
+function dateKey(y,m,d){ return `${y}-${pad(m+1)}-${pad(d)}`; }
+
+function renderCalendar(){
+  const grid = document.getElementById('calGrid');
+  // Remove old day cells (keep headers = first 7)
+  while(grid.children.length > 7) grid.removeChild(grid.lastChild);
+
+  document.getElementById('monthLabel').textContent =
+    `${months[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+
+  const year  = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+
+  // First day of month (0=Sun → convert to Mon-based)
+  let firstDay = new Date(year, month, 1).getDay();
+  firstDay = (firstDay === 0) ? 6 : firstDay - 1;
+
+  const daysInMonth = new Date(year, month+1, 0).getDate();
+  const daysInPrev  = new Date(year, month, 0).getDate();
+  const today = new Date();
+
+  // Prev month filler
+  for(let i = firstDay - 1; i >= 0; i--){
+    const d = daysInPrev - i;
+    const cell = makeCell(year, month-1, d, true);
+    grid.appendChild(cell);
+  }
+
+  // Current month
+  for(let d = 1; d <= daysInMonth; d++){
+    const isToday = (year === today.getFullYear() && month === today.getMonth() && d === today.getDate());
+    const cell = makeCell(year, month, d, false, isToday);
+    grid.appendChild(cell);
+  }
+
+  // Next month filler
+  const total = firstDay + daysInMonth;
+  const remainder = total % 7 === 0 ? 0 : 7 - (total % 7);
+  for(let d = 1; d <= remainder; d++){
+    const cell = makeCell(year, month+1, d, true);
+    grid.appendChild(cell);
+  }
+
+  renderHeatmap();
+}
+
+function makeCell(year, month, day, otherMonth, isToday=false){
+  const cell = document.createElement('div');
+  cell.className = 'cal-day' + (otherMonth ? ' other-month' : '') + (isToday ? ' today' : '');
+
+  const key = dateKey(year, month, day);
+  const data = tradeData[key];
+
+  cell.innerHTML = `<div class="cal-day-num">${day}</div>`;
+
+  if(data && !otherMonth){
+    const sign = data.pnl > 0 ? '+' : '';
+    cell.innerHTML += `
+      <div class="cal-pnl ${data.type}">${sign}$${Math.abs(data.pnl).toLocaleString()}</div>
+      <div class="cal-trades-count">${data.trades} trade${data.trades>1?'s':''}</div>
+      <div class="cal-dot ${data.type}"></div>
+    `;
+  }
+
+  cell.addEventListener('click', () => showDayDetail(year, month, day, key, data));
+  return cell;
+}
+
+function showDayDetail(year, month, day, key, data){
+  const label = document.getElementById('selectedDateLabel');
+  const content = document.getElementById('dayDetailContent');
+
+  label.textContent = `${months[month]} ${day}, ${year}`;
+
+  if(!data){
+    content.innerHTML = `
+      <div style="text-align:center;padding:var(--sp-6);color:var(--clr-text-muted)">
+        <div style="font-size:2rem;margin-bottom:var(--sp-3)">😴</div>
+        <div style="font-size:var(--fs-sm)">No trades this day</div>
+      </div>
+      <button class="btn btn-primary btn-sm" style="width:100%" onclick="document.getElementById('addTradeModal').classList.add('open')">+ Add Trade</button>
+    `;
+    return;
+  }
+
+  const pnlColor = data.type === 'profit' ? 'var(--clr-profit)' : data.type === 'loss' ? 'var(--clr-loss)' : 'var(--clr-text-muted)';
+  const sign = data.pnl > 0 ? '+' : '';
+
+  content.innerHTML = `
+    <div style="padding:var(--sp-4);background:var(--clr-surface-2);border-radius:var(--radius-md);text-align:center">
+      <div style="font-size:var(--fs-2xl);font-weight:var(--fw-bold);font-family:var(--font-mono);color:${pnlColor}">${sign}$${Math.abs(data.pnl).toLocaleString()}</div>
+      <div style="font-size:var(--fs-xs);color:var(--clr-text-muted);margin-top:var(--sp-1)">Daily P&L</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3)">
+      <div style="padding:var(--sp-3);background:var(--clr-surface-2);border-radius:var(--radius-md);text-align:center">
+        <div style="font-weight:var(--fw-bold);font-family:var(--font-mono)">${data.trades}</div>
+        <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Trades</div>
+      </div>
+      <div style="padding:var(--sp-3);background:var(--clr-surface-2);border-radius:var(--radius-md);text-align:center">
+        <div style="font-weight:var(--fw-bold);font-family:var(--font-mono);color:${pnlColor}">${data.type === 'profit' ? '✓ Win' : data.type === 'loss' ? '✗ Loss' : '— B/E'}</div>
+        <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Result</div>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-sm" style="width:100%" onclick="document.getElementById('addTradeModal').classList.add('open')">+ Add Trade</button>
+  `;
+}
+
+function renderHeatmap(){
+  const strip = document.getElementById('heatmapStrip');
+  strip.innerHTML = '';
+  const year  = currentDate.getFullYear();
+  const month = currentDate.getMonth();
+  const days  = new Date(year, month+1, 0).getDate();
+
+  for(let d = 1; d <= days; d++){
+    const key  = dateKey(year, month, d);
+    const data = tradeData[key];
+    let bg = 'var(--clr-surface-2)';
+
+    if(data){
+      if(data.type === 'profit'){
+        const intensity = Math.min(data.pnl / 1500, 1);
+        bg = `rgba(0,212,170,${0.2 + intensity * 0.7})`;
+      } else if(data.type === 'loss'){
+        const intensity = Math.min(Math.abs(data.pnl) / 500, 1);
+        bg = `rgba(255,71,87,${0.2 + intensity * 0.7})`;
+      }
+    }
+
+    const cell = document.createElement('div');
+    cell.title = `${months[month]} ${d}: ${data ? (data.pnl >= 0 ? '+' : '') + '$' + data.pnl : 'No trades'}`;
+    cell.style.cssText = `width:28px;height:28px;border-radius:4px;background:${bg};cursor:pointer;transition:transform 0.15s;flex-shrink:0`;
+    cell.onmouseover = () => cell.style.transform = 'scale(1.2)';
+    cell.onmouseout  = () => cell.style.transform = 'scale(1)';
+
+    // Day label
+    const label = document.createElement('div');
+    label.style.cssText = 'font-size:9px;color:var(--clr-text-muted);text-align:center;margin-top:2px';
+    label.textContent = d;
+
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'display:flex;flex-direction:column;align-items:center';
+    wrap.appendChild(cell);
+    wrap.appendChild(label);
+    strip.appendChild(wrap);
+  }
+}
+
+// Nav buttons
+document.getElementById('prevMonth').addEventListener('click', () => {
+  currentDate.setMonth(currentDate.getMonth() - 1);
+  renderCalendar();
+});
+document.getElementById('nextMonth').addEventListener('click', () => {
+  currentDate.setMonth(currentDate.getMonth() + 1);
+  renderCalendar();
+});
+
+// Init
+renderCalendar();
+</script>
+
+<script src="js/app.js"></script>
+</body>
+</html>
