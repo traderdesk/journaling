@@ -12,7 +12,7 @@
 <body>
 <div class="app-layout">
 
-  <!-- SIDEBAR (same as index) -->
+  <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-logo">
       <div class="sidebar-logo-icon">
@@ -23,34 +23,42 @@
       </div>
       <span class="sidebar-logo-text">Trade<span>Log</span></span>
     </div>
+
     <nav class="sidebar-nav">
       <div class="nav-section-label">Main</div>
-<a href="index.html" class="nav-item">
-  <svg class="nav-item-icon" viewBox="0 0 24 24" ...>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
-          <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
+
+      <a href="index.html" class="nav-item">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7" rx="1"/>
+          <rect x="14" y="3" width="7" height="7" rx="1"/>
+          <rect x="3" y="14" width="7" height="7" rx="1"/>
+          <rect x="14" y="14" width="7" height="7" rx="1"/>
         </svg>
         <span class="nav-item-label">Dashboard</span>
       </a>
+
       <a href="journal.html" class="nav-item active">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
           <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
         </svg>
         <span class="nav-item-label">Trade Journal</span>
         <span class="nav-badge">12</span>
       </a>
+
       <a href="analytics.html" class="nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="18" y1="20" x2="18" y2="10"/>
           <line x1="12" y1="20" x2="12" y2="4"/>
           <line x1="6" y1="20" x2="6" y2="14"/>
         </svg>
         <span class="nav-item-label">Analytics</span>
       </a>
+
       <a href="calendar.html" class="nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <rect x="3" y="4" width="18" height="18" rx="2"/>
           <line x1="16" y1="2" x2="16" y2="6"/>
           <line x1="8" y1="2" x2="8" y2="6"/>
@@ -58,25 +66,36 @@
         </svg>
         <span class="nav-item-label">Calendar</span>
       </a>
+
       <div class="nav-section-label" style="margin-top:var(--sp-4)">Tools</div>
+
       <a href="playbook.html" class="nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
           <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
         </svg>
         <span class="nav-item-label">Playbook</span>
       </a>
+
       <a href="settings.html" class="nav-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="3"/>
           <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06-.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
         </svg>
         <span class="nav-item-label">Settings</span>
       </a>
     </nav>
+
     <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar">JD</div>
+        <div class="user-info">
+          <div class="user-name">John Doe</div>
+          <div class="user-plan">✦ Pro Plan</div>
+        </div>
+      </div>
       <button class="sidebar-collapse-btn" id="collapseBtn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <polyline points="15 18 9 12 15 6"/>
         </svg>
         <span class="nav-item-label">Collapse</span>
@@ -84,119 +103,139 @@
     </div>
   </aside>
 
-<div class="app-content">
+  <!-- MAIN -->
+  <div class="app-content">
+
     <header class="topbar">
-      <div class="topbar-title">Trade Journal <span>/ All Trades</span></div>
-      <div class="topbar-search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"/>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-        <input type="text" placeholder="Search symbol, strategy..." id="tradeSearch">
+      <div class="topbar-left">
+        <div>
+          <div class="page-title">Trade Journal</div>
+          <div class="page-subtitle">All Trades</div>
+        </div>
       </div>
-      <div class="topbar-actions">
-        <button class="topbar-icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="notification-dot"></span></button>
-        <div class="topbar-avatar">JD</div>
+      <div class="topbar-right">
+        <div class="search-bar">
+          <span class="search-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </span>
+          <input type="text" class="search-input" placeholder="Search symbol, strategy..." id="tradeSearch">
+        </div>
+        <div class="topbar-divider"></div>
+        <button class="btn btn-secondary btn-sm">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Export CSV
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="document.getElementById('addTradeModal').classList.add('open')">
+          + Add Trade
+        </button>
       </div>
     </header>
 
     <main class="page-content">
-      <div class="page-header">
-        <div class="page-header-left">
-          <h1>Trade Journal</h1>
-          <p>Track, review and learn from every trade you take.</p>
-        </div>
-        <div class="page-header-right">
-          <button class="btn btn-secondary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px">
-              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-              <polyline points="7 10 12 15 17 10"/>
-              <line x1="12" y1="15" x2="12" y2="3"/>
-            </svg>
-            Export CSV
-          </button>
-          <button class="btn btn-primary" onclick="document.getElementById('addTradeModal').classList.add('open')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px">
-              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-            </svg>
-            Add Trade
-          </button>
-        </div>
-      </div>
 
       <!-- FILTER BAR -->
-      <div class="filter-bar">
-        <select class="form-select">
-          <option>All Directions</option>
-          <option>Long Only</option>
-          <option>Short Only</option>
-        </select>
-        <select class="form-select">
-          <option>All Results</option>
-          <option>Wins</option>
-          <option>Losses</option>
-          <option>Break Even</option>
-        </select>
-        <select class="form-select">
-          <option>All Strategies</option>
-          <option>Breakout</option>
-          <option>Trend Following</option>
-          <option>Mean Reversion</option>
-          <option>Gap Fill</option>
-          <option>Momentum</option>
-        </select>
-        <select class="form-select">
-          <option>All Assets</option>
-          <option>Equity</option>
-          <option>Options</option>
-          <option>Futures</option>
-          <option>Forex</option>
-          <option>Crypto</option>
-        </select>
-        <div class="filter-separator"></div>
-        <input type="date" class="form-input" style="width:150px">
-        <span style="font-size:var(--fs-sm);color:var(--clr-text-muted)">to</span>
-        <input type="date" class="form-input" style="width:150px">
-        <div class="filter-separator"></div>
-        <button class="btn btn-ghost btn-sm">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px">
-            <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/>
-          </svg>
-          Reset
-        </button>
+      <div class="card" style="padding:var(--sp-3) var(--sp-5)">
+        <div style="display:flex;gap:var(--sp-3);align-items:center;flex-wrap:wrap">
+          <select class="form-select" style="width:auto">
+            <option>All Directions</option>
+            <option>Long Only</option>
+            <option>Short Only</option>
+          </select>
+          <select class="form-select" style="width:auto">
+            <option>All Results</option>
+            <option>Wins</option>
+            <option>Losses</option>
+            <option>Break Even</option>
+          </select>
+          <select class="form-select" style="width:auto">
+            <option>All Strategies</option>
+            <option>Breakout</option>
+            <option>Trend Following</option>
+            <option>Mean Reversion</option>
+            <option>Gap Fill</option>
+            <option>Momentum</option>
+          </select>
+          <select class="form-select" style="width:auto">
+            <option>All Assets</option>
+            <option>Equity</option>
+            <option>Options</option>
+            <option>Futures</option>
+            <option>Forex</option>
+            <option>Crypto</option>
+          </select>
+          <div style="width:1px;height:24px;background:var(--clr-border)"></div>
+          <input type="date" class="form-input" style="width:150px">
+          <span style="font-size:var(--fs-sm);color:var(--clr-text-muted)">to</span>
+          <input type="date" class="form-input" style="width:150px">
+          <div style="width:1px;height:24px;background:var(--clr-border)"></div>
+          <button class="btn btn-ghost btn-sm">↺ Reset</button>
+        </div>
       </div>
 
-      <!-- JOURNAL SUMMARY ROW -->
-      <div class="stats-grid" style="margin-bottom:var(--sp-lg)">
-        <div class="stat-card profit">
-          <div class="stat-header">
-            <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-            <span class="stat-change up">+12.4%</span>
+      <!-- STATS ROW -->
+      <div class="dashboard-stats">
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon teal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+              </svg>
+            </div>
+            <span class="stat-card-change up">+12.4%</span>
           </div>
-          <div class="stat-value text-profit">$4,280</div>
-          <div class="stat-label">Total P&L</div>
+          <div class="stat-card-value" style="color:var(--clr-profit)">$4,280</div>
+          <div class="stat-card-label">Total P&L</div>
         </div>
-        <div class="stat-card info">
-          <div class="stat-header">
-            <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
           </div>
-          <div class="stat-value">47</div>
-          <div class="stat-label">Total Trades</div>
+          <div class="stat-card-value">47</div>
+          <div class="stat-card-label">Total Trades</div>
         </div>
-        <div class="stat-card profit">
-          <div class="stat-header">
-            <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg></div>
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon teal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px">
+                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+              </svg>
+            </div>
           </div>
-          <div class="stat-value">68.4<span style="font-size:var(--fs-xl);color:var(--clr-text-secondary)">%</span></div>
-          <div class="stat-label">Win Rate</div>
+          <div class="stat-card-value" style="color:var(--clr-profit)">68.4%</div>
+          <div class="stat-card-label">Win Rate</div>
         </div>
-        <div class="stat-card warn">
-          <div class="stat-header">
-            <div class="stat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+
+        <div class="stat-card">
+          <div class="stat-card-header">
+            <div class="stat-card-icon orange">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px">
+                <circle cx="12" cy="12" r="10"/>
+                <polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <span class="stat-card-change up">+0.3</span>
           </div>
-          <div class="stat-value">2.4<span style="font-size:var(--fs-xl);color:var(--clr-text-secondary)">R</span></div>
-          <div class="stat-label">Avg R:R</div>
+          <div class="stat-card-value">2.4R</div>
+          <div class="stat-card-label">Avg R:R</div>
         </div>
+
       </div>
 
       <!-- TRADES TABLE -->
@@ -206,19 +245,18 @@
             <div class="card-title">All Trades</div>
             <div class="card-subtitle">47 trades found</div>
           </div>
-          <div class="d-flex gap-sm align-center">
-            <div class="tabs">
-              <button class="tab active">All</button>
-              <button class="tab">Open</button>
-              <button class="tab">Closed</button>
-            </div>
+          <div class="tabs">
+            <div class="tab-item active">All</div>
+            <div class="tab-item">Open</div>
+            <div class="tab-item">Closed</div>
           </div>
         </div>
+
         <div class="table-wrap">
           <table class="data-table" id="tradesTable">
             <thead>
               <tr>
-                <th class="sorted">Symbol <span class="sort-icon">↕</span></th>
+                <th>Symbol</th>
                 <th>Dir</th>
                 <th>Strategy</th>
                 <th>Entry</th>
@@ -234,12 +272,10 @@
                 <th></th>
               </tr>
             </thead>
-            <tbody id="tradesBody">
-              <!-- JS will render from trades.js -->
-            </tbody>
+            <tbody id="tradesBody"></tbody>
           </table>
         </div>
-        <!-- EMPTY STATE (shown when no trades) -->
+
         <div class="empty-state" id="emptyState" style="display:none">
           <div class="empty-state-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -248,117 +284,117 @@
             </svg>
           </div>
           <h3>No trades yet</h3>
-          <p>Start logging your trades to track your performance and improve your strategy.</p>
+          <p>Start logging your trades to track performance.</p>
           <button class="btn btn-primary" onclick="document.getElementById('addTradeModal').classList.add('open')">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px">
-              <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
-            </svg>
-            Add Your First Trade
+            + Add Your First Trade
           </button>
         </div>
       </div>
+
     </main>
   </div>
 </div>
 
-<!-- ADD TRADE MODAL (same as index) -->
+<!-- ADD TRADE MODAL -->
 <div class="modal-overlay" id="addTradeModal">
-  <div class="modal modal-lg">
+  <div class="modal">
     <div class="modal-header">
-      <h2 class="modal-title">Add New Trade</h2>
-      <button class="modal-close" onclick="document.getElementById('addTradeModal').classList.remove('open')">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-        </svg>
-      </button>
+      <div class="modal-title">Add New Trade</div>
+      <div class="modal-close" onclick="document.getElementById('addTradeModal').classList.remove('open')">✕</div>
     </div>
     <div class="modal-body">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-md)">
-        <div class="form-group" style="grid-column:1/-1">
+      <div style="display:flex;flex-direction:column;gap:var(--sp-4)">
+
+        <div class="form-group">
           <label class="form-label">Direction <span>*</span></label>
-          <div class="direction-toggle">
-            <input type="radio" name="dir2" id="dirLong2" value="long" checked>
-            <label for="dirLong2">▲ Long</label>
-            <input type="radio" name="dir2" id="dirShort2" value="short">
-            <label for="dirShort2">▼ Short</label>
+          <div style="display:flex;gap:var(--sp-3)">
+            <label style="display:flex;align-items:center;gap:var(--sp-2);cursor:pointer;padding:var(--sp-2) var(--sp-4);border:1px solid var(--clr-profit);border-radius:var(--radius-sm);color:var(--clr-profit);font-size:var(--fs-sm)">
+              <input type="radio" name="dir2" value="long" checked style="accent-color:var(--clr-profit)"> ▲ Long
+            </label>
+            <label style="display:flex;align-items:center;gap:var(--sp-2);cursor:pointer;padding:var(--sp-2) var(--sp-4);border:1px solid var(--clr-loss);border-radius:var(--radius-sm);color:var(--clr-loss);font-size:var(--fs-sm)">
+              <input type="radio" name="dir2" value="short" style="accent-color:var(--clr-loss)"> ▼ Short
+            </label>
           </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Symbol <span>*</span></label>
-          <input type="text" class="form-input" id="jSymbol" placeholder="AAPL, TSLA...">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Symbol <span>*</span></label>
+            <input type="text" class="form-input" id="jSymbol" placeholder="AAPL, BTC...">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Asset Type</label>
+            <select class="form-select" id="jAsset">
+              <option>Equity</option><option>Options</option><option>Futures</option>
+              <option>Forex</option><option>Crypto</option><option>ETF</option>
+            </select>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Asset Type</label>
-          <select class="form-select" id="jAsset">
-            <option>Equity</option><option>Options</option><option>Futures</option>
-            <option>Forex</option><option>Crypto</option><option>ETF</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Entry Price <span>*</span></label>
-          <div class="input-group">
-            <span class="input-addon">$</span>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Entry Price <span>*</span></label>
             <input type="number" class="form-input" id="jEntry" placeholder="0.00" step="0.01">
           </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Exit Price</label>
-          <div class="input-group">
-            <span class="input-addon">$</span>
+          <div class="form-group">
+            <label class="form-label">Exit Price</label>
             <input type="number" class="form-input" id="jExit" placeholder="0.00" step="0.01">
           </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Size <span>*</span></label>
-          <input type="number" class="form-input" id="jSize" placeholder="Shares/Contracts">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Stop Loss</label>
-          <div class="input-group">
-            <span class="input-addon">$</span>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Size <span>*</span></label>
+            <input type="number" class="form-input" id="jSize" placeholder="Shares/Contracts">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Stop Loss</label>
             <input type="number" class="form-input" id="jStop" placeholder="0.00" step="0.01">
           </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Entry Date <span>*</span></label>
-          <input type="date" class="form-input" id="jEntryDate">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Entry Date <span>*</span></label>
+            <input type="date" class="form-input" id="jEntryDate">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Exit Date</label>
+            <input type="date" class="form-input" id="jExitDate">
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label">Exit Date</label>
-          <input type="date" class="form-input" id="jExitDate">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Strategy</label>
+            <select class="form-select" id="jStrategy">
+              <option value="">Select...</option>
+              <option>Breakout</option><option>Trend Following</option>
+              <option>Mean Reversion</option><option>Gap Fill</option>
+              <option>Momentum</option><option>Swing Trade</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Emotion</label>
+            <select class="form-select" id="jEmotion">
+              <option value="">How did you feel?</option>
+              <option>😤 Disciplined</option><option>😰 Anxious</option>
+              <option>😤 Overconfident</option><option>😌 Calm</option>
+              <option>😡 Revenge Trade</option><option>🤔 Uncertain</option>
+            </select>
+          </div>
         </div>
+
         <div class="form-group">
-          <label class="form-label">Strategy</label>
-          <select class="form-select" id="jStrategy">
-            <option value="">Select...</option>
-            <option>Breakout</option><option>Trend Following</option>
-            <option>Mean Reversion</option><option>Gap Fill</option>
-            <option>Momentum</option><option>Swing Trade</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Emotion</label>
-          <select class="form-select" id="jEmotion">
-            <option value="">How did you feel?</option>
-            <option>😤 Disciplined</option><option>😰 Anxious</option>
-            <option>😤 Overconfident</option><option>😌 Calm</option>
-            <option>😡 Revenge Trade</option><option>🤔 Uncertain</option>
-          </select>
-        </div>
-        <div class="form-group" style="grid-column:1/-1">
           <label class="form-label">Notes</label>
           <textarea class="form-textarea" id="jNotes" placeholder="Setup, reasoning, execution, lessons..."></textarea>
         </div>
+
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-ghost" onclick="document.getElementById('addTradeModal').classList.remove('open')">Cancel</button>
-      <button class="btn btn-primary" onclick="saveTrade()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px">
-          <polyline points="20 6 9 17 4 12"/>
-        </svg>
-        Save Trade
-      </button>
+      <button class="btn btn-secondary" onclick="document.getElementById('addTradeModal').classList.remove('open')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveTrade()">Save Trade</button>
     </div>
   </div>
 </div>
@@ -367,16 +403,10 @@
 <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
 <div class="drawer" id="tradeDrawer">
   <div class="drawer-header">
-    <h2 class="drawer-title" id="drawerTitle">Trade Detail</h2>
-    <button class="modal-close" onclick="closeDrawer()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-      </svg>
-    </button>
+    <div class="drawer-title" id="drawerTitle">Trade Detail</div>
+    <div class="modal-close" onclick="closeDrawer()">✕</div>
   </div>
-  <div class="drawer-body" id="drawerBody">
-    <!-- Populated by JS -->
-  </div>
+  <div class="drawer-body" id="drawerBody"></div>
 </div>
 
 <div class="toast-container" id="toastContainer"></div>
