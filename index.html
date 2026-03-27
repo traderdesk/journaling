@@ -3,10 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TradeFlow — Trading Journal</title>
+  <title>TradeFlow — Playbook</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
-  
-  <!-- ✅ SAHI ORDER -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
@@ -14,12 +12,12 @@
 </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/supabase.js"></script>
+<script src="js/supabase.js"></script>
+
 <div class="app-layout">
 
   <!-- ═══ SIDEBAR ═══ -->
   <aside class="sidebar" id="sidebar">
-
     <div class="sidebar-logo">
       <div class="sidebar-logo-icon">📈</div>
       <div>
@@ -29,10 +27,9 @@
     </div>
 
     <nav class="sidebar-nav">
-
       <span class="nav-section-label">Main</span>
 
-      <a href="index.html" class="nav-item active" data-page="dashboard">
+      <a href="index.html" class="nav-item" data-page="dashboard">
         <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
           <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
@@ -57,7 +54,7 @@
         Analytics
       </a>
 
-      <a href="#" class="nav-item" data-page="calendar">
+      <a href="calendar.html" class="nav-item" data-page="calendar">
         <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/>
           <line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
@@ -67,7 +64,7 @@
 
       <span class="nav-section-label" style="margin-top: var(--sp-4)">Tools</span>
 
-      <a href="playbook.html" class="nav-item" data-page="playbook">
+      <a href="playbook.html" class="nav-item active" data-page="playbook">
         <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
           <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
@@ -99,7 +96,6 @@
         </svg>
         Settings
       </a>
-
     </nav>
 
     <div class="sidebar-footer">
@@ -114,7 +110,6 @@
         </svg>
       </div>
     </div>
-
   </aside>
 
   <!-- ═══ MAIN CONTENT ═══ -->
@@ -124,23 +119,18 @@
     <header class="topbar">
       <div class="topbar-left">
         <div>
-          <div class="page-title">Dashboard</div>
-          <div class="page-subtitle">Welcome back, Ali 👋</div>
+          <div class="page-title">Playbook</div>
+          <div class="page-subtitle">Your trading strategies & setups 📖</div>
         </div>
       </div>
       <div class="topbar-right">
         <div class="search-bar">
           <span class="search-icon">🔍</span>
-          <input type="text" class="search-input" placeholder="Search trades...">
+          <input type="text" class="search-input" placeholder="Search strategies...">
         </div>
         <div class="topbar-divider"></div>
-        <div class="topbar-btn tooltip" data-tip="Notifications" style="position:relative">
-          🔔
-          <span class="notif-dot"></span>
-        </div>
-        <div class="topbar-btn tooltip" data-tip="Theme">🌙</div>
-        <button class="btn btn-primary btn-sm" onclick="document.getElementById('addTradeModal').classList.add('open')">
-          + New Trade
+        <button class="btn btn-primary btn-sm" onclick="document.getElementById('addStrategyModal').classList.add('open')">
+          + New Strategy
         </button>
       </div>
     </header>
@@ -148,291 +138,265 @@
     <!-- PAGE CONTENT -->
     <main class="page-content">
 
-      <!-- STAT CARDS -->
+      <!-- STATS ROW -->
       <div class="dashboard-stats">
-
         <div class="stat-card">
           <div class="stat-card-header">
-            <div class="stat-card-icon purple">💰</div>
-            <span class="stat-card-change up">+12.4%</span>
+            <div class="stat-card-icon purple">📖</div>
+            <span class="stat-card-change up">+2</span>
           </div>
-          <div class="stat-card-value" style="color: var(--clr-profit)">$8,420</div>
-          <div class="stat-card-label">Total P&L (Month)</div>
+          <div class="stat-card-value">8</div>
+          <div class="stat-card-label">Total Strategies</div>
         </div>
-
         <div class="stat-card">
           <div class="stat-card-header">
             <div class="stat-card-icon teal">🎯</div>
-            <span class="stat-card-change up">+3%</span>
+            <span class="stat-card-change up">+5%</span>
           </div>
-          <div class="stat-card-value">68%</div>
-          <div class="stat-card-label">Win Rate</div>
+          <div class="stat-card-value" style="color:var(--clr-profit)">72%</div>
+          <div class="stat-card-label">Best Win Rate</div>
         </div>
-
         <div class="stat-card">
           <div class="stat-card-header">
-            <div class="stat-card-icon orange">📊</div>
-            <span class="stat-card-change down">-0.2</span>
+            <div class="stat-card-icon orange">⭐</div>
           </div>
-          <div class="stat-card-value">2.4</div>
-          <div class="stat-card-label">Profit Factor</div>
+          <div class="stat-card-value">3</div>
+          <div class="stat-card-label">Active Setups</div>
         </div>
-
         <div class="stat-card">
           <div class="stat-card-header">
-            <div class="stat-card-icon red">⚡</div>
-            <span class="stat-card-change up">+5</span>
+            <div class="stat-card-icon red">📊</div>
+            <span class="stat-card-change up">+0.3</span>
           </div>
-          <div class="stat-card-value">47</div>
-          <div class="stat-card-label">Total Trades</div>
+          <div class="stat-card-value">2.8</div>
+          <div class="stat-card-label">Avg R:R</div>
+        </div>
+      </div>
+
+      <!-- FILTER TABS -->
+      <div class="card" style="padding: var(--sp-3) var(--sp-5)">
+        <div style="display:flex;gap:var(--sp-2);align-items:center;flex-wrap:wrap">
+          <span style="font-size:var(--fs-sm);color:var(--clr-text-muted);margin-right:var(--sp-2)">Filter:</span>
+          <div class="tabs">
+            <div class="tab-item active">All</div>
+            <div class="tab-item">Breakout</div>
+            <div class="tab-item">Trend</div>
+            <div class="tab-item">Reversal</div>
+            <div class="tab-item">Scalp</div>
+            <div class="tab-item">Swing</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STRATEGY CARDS GRID -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:var(--sp-5)">
+
+        <!-- Strategy Card 1 -->
+        <div class="card" style="border-left: 3px solid var(--clr-accent-purple);cursor:pointer;transition:transform 0.2s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div class="card-header" style="padding-bottom:var(--sp-3)">
+            <div style="display:flex;align-items:center;gap:var(--sp-3)">
+              <div class="stat-card-icon purple" style="width:40px;height:40px;font-size:1.2rem">🚀</div>
+              <div>
+                <div class="card-title" style="font-size:var(--fs-base)">Breakout Momentum</div>
+                <div class="card-subtitle">Crypto · Intraday</div>
+              </div>
+            </div>
+            <div style="display:flex;gap:var(--sp-2)">
+              <span class="badge badge-profit">Active</span>
+            </div>
+          </div>
+
+          <p style="font-size:var(--fs-sm);color:var(--clr-text-muted);line-height:1.6;margin-bottom:var(--sp-4)">
+            Enter on confirmed breakout above key resistance with volume surge. Wait for retest before entry.
+          </p>
+
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-3);margin-bottom:var(--sp-4)">
+            <div style="text-align:center;padding:var(--sp-2);background:var(--clr-surface-2);border-radius:var(--radius-sm)">
+              <div style="font-size:var(--fs-base);font-weight:var(--fw-bold);color:var(--clr-profit);font-family:var(--font-mono)">72%</div>
+              <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Win Rate</div>
+            </div>
+            <div style="text-align:center;padding:var(--sp-2);background:var(--clr-surface-2);border-radius:var(--radius-sm)">
+              <div style="font-size:var(--fs-base);font-weight:var(--fw-bold);font-family:var(--font-mono)">3.1</div>
+              <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">R:R</div>
+            </div>
+            <div style="text-align:center;padding:var(--sp-2);background:var(--clr-surface-2);border-radius:var(--radius-sm)">
+              <div style="font-size:var(--fs-base);font-weight:var(--fw-bold);font-family:var(--font-mono)">18</div>
+              <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Trades</div>
+            </div>
+          </div>
+
+          <!-- Rules -->
+          <div style="border-top:1px solid var(--clr-border);padding-top:var(--sp-3)">
+            <div style="font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:var(--clr-text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:var(--sp-2)">Rules</div>
+            <div style="display:flex;flex-direction:column;gap:var(--sp-1)">
+              <div style="font-size:var(--fs-sm);display:flex;gap:var(--sp-2)"><span style="color:var(--clr-profit)">✓</span> Volume > 2x average</div>
+              <div style="font-size:var(--fs-sm);display:flex;gap:var(--sp-2)"><span style="color:var(--clr-profit)">✓</span> Break + retest confirmed</div>
+              <div style="font-size:var(--fs-sm);display:flex;gap:var(--sp-2)"><span style="color:var(--clr-loss)">✗</span> No trade during news</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:var(--sp-2);margin-top:var(--sp-4)">
+            <button class="btn btn-ghost btn-sm" style="flex:1">Edit</button>
+            <button class="btn btn-primary btn-sm" style="flex:1">View Trades →</button>
+          </div>
+        </div>
+
+        <!-- Strategy Card 2 -->
+        <div class="card" style="border-left: 3px solid var(--clr-accent-teal);cursor:pointer;transition:transform 0.2s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div class="card-header" style="padding-bottom:var(--sp-3)">
+            <div style="display:flex;align-items:center;gap:var(--sp-3)">
+              <div class="stat-card-icon teal" style="width:40px;height:40px;font-size:1.2rem">📈</div>
+              <div>
+                <div class="card-title" style="font-size:var(--fs-base)">Trend Continuation</div>
+                <div class="card-subtitle">Forex · Swing</div>
+              </div>
+            </div>
+            <span class="badge badge-profit">Active</span>
+          </div>
+
+          <p style="font-size:var(--fs-sm);color:var(--clr-text-muted);line-height:1.6;margin-bottom:var(--sp-4)">
+            Trade pullbacks in strong trending markets. Enter at EMA confluence with higher timeframe alignment.
+          </p>
+
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-3);margin-bottom:var(--sp-4)">
+            <div style="text-align:center;padding:var(--sp-2);background:var(--clr-surface-2);border-radius:var(--radius-sm)">
+              <div style="font-size:var(--fs-base);font-weight:var(--fw-bold);color:var(--clr-profit);font-family:var(--font-mono)">65%</div>
+              <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Win Rate</div>
+            </div>
+            <div style="text-align:center;padding:var(--sp-2);background:var(--clr-surface-2);border-radius:var(--radius-sm)">
+              <div style="font-size:var(--fs-base);font-weight:var(--fw-bold);font-family:var(--font-mono)">2.8</div>
+              <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">R:R</div>
+            </div>
+            <div style="text-align:center;padding:var(--sp-2);background:var(--clr-surface-2);border-radius:var(--radius-sm)">
+              <div style="font-size:var(--fs-base);font-weight:var(--fw-bold);font-family:var(--font-mono)">24</div>
+              <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Trades</div>
+            </div>
+          </div>
+
+          <div style="border-top:1px solid var(--clr-border);padding-top:var(--sp-3)">
+            <div style="font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:var(--clr-text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:var(--sp-2)">Rules</div>
+            <div style="display:flex;flex-direction:column;gap:var(--sp-1)">
+              <div style="font-size:var(--fs-sm);display:flex;gap:var(--sp-2)"><span style="color:var(--clr-profit)">✓</span> HTF trend confirmed</div>
+              <div style="font-size:var(--fs-sm);display:flex;gap:var(--sp-2)"><span style="color:var(--clr-profit)">✓</span> EMA 20/50 confluence</div>
+              <div style="font-size:var(--fs-sm);display:flex;gap:var(--sp-2)"><span style="color:var(--clr-loss)">✗</span> No counter-trend entries</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:var(--sp-2);margin-top:var(--sp-4)">
+            <button class="btn btn-ghost btn-sm" style="flex:1">Edit</button>
+            <button class="btn btn-primary btn-sm" style="flex:1">View Trades →</button>
+          </div>
+        </div>
+
+        <!-- Strategy Card 3 -->
+        <div class="card" style="border-left: 3px solid var(--clr-warning);cursor:pointer;transition:transform 0.2s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+          <div class="card-header" style="padding-bottom:var(--sp-3)">
+            <div style="display:flex;align-items:center;gap:var(--sp-3)">
+              <div class="stat-card-icon orange" style="width:40px;height:40px;font-size:1.2rem">🔄</div>
+              <div>
+                <div class="card-title" style="font-size:var(--fs-base)">Mean Reversion</div>
+                <div class="card-subtitle">Stocks · Intraday</div>
+              </div>
+            </div>
+            <span class="badge badge-neutral">Testing</span>
+          </div>
+
+          <p style="font-size:var(--fs-sm);color:var(--clr-text-muted);line-height:1.6;margin-bottom:var(--sp-4)">
+            Fade extreme moves when RSI oversold/overbought at key S/R levels with divergence confirmation.
+          </p>
+
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-3);margin-bottom:var(--sp-4)">
+            <div style="text-align:center;padding:var(--sp-2);background:var(--clr-surface-2);border-radius:var(--radius-sm)">
+              <div style="font-size:var(--fs-base);font-weight:var(--fw-bold);color:var(--clr-warning);font-family:var(--font-mono)">58%</div>
+              <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Win Rate</div>
+            </div>
+            <div style="text-align:center;padding:var(--sp-2);background:var(--clr-surface-2);border-radius:var(--radius-sm)">
+              <div style="font-size:var(--fs-base);font-weight:var(--fw-bold);font-family:var(--font-mono)">2.1</div>
+              <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">R:R</div>
+            </div>
+            <div style="text-align:center;padding:var(--sp-2);background:var(--clr-surface-2);border-radius:var(--radius-sm)">
+              <div style="font-size:var(--fs-base);font-weight:var(--fw-bold);font-family:var(--font-mono)">9</div>
+              <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Trades</div>
+            </div>
+          </div>
+
+          <div style="border-top:1px solid var(--clr-border);padding-top:var(--sp-3)">
+            <div style="font-size:var(--fs-xs);font-weight:var(--fw-semibold);color:var(--clr-text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:var(--sp-2)">Rules</div>
+            <div style="display:flex;flex-direction:column;gap:var(--sp-1)">
+              <div style="font-size:var(--fs-sm);display:flex;gap:var(--sp-2)"><span style="color:var(--clr-profit)">✓</span> RSI divergence present</div>
+              <div style="font-size:var(--fs-sm);display:flex;gap:var(--sp-2)"><span style="color:var(--clr-profit)">✓</span> Key S/R level hit</div>
+              <div style="font-size:var(--fs-sm);display:flex;gap:var(--sp-2)"><span style="color:var(--clr-loss)">✗</span> No strong trend entries</div>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:var(--sp-2);margin-top:var(--sp-4)">
+            <button class="btn btn-ghost btn-sm" style="flex:1">Edit</button>
+            <button class="btn btn-primary btn-sm" style="flex:1">View Trades →</button>
+          </div>
+        </div>
+
+        <!-- Add New Card -->
+        <div class="card" style="border: 2px dashed var(--clr-border);background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--sp-3);min-height:280px;cursor:pointer;transition:all 0.2s"
+          onmouseover="this.style.borderColor='var(--clr-accent-purple)';this.style.background='rgba(108,99,255,0.04)'"
+          onmouseout="this.style.borderColor='var(--clr-border)';this.style.background='transparent'"
+          onclick="document.getElementById('addStrategyModal').classList.add('open')">
+          <div style="width:48px;height:48px;border-radius:50%;background:var(--clr-surface-2);display:flex;align-items:center;justify-content:center;font-size:1.5rem">+</div>
+          <div style="font-weight:var(--fw-semibold)">Add New Strategy</div>
+          <div style="font-size:var(--fs-sm);color:var(--clr-text-muted)">Document your trading setup</div>
         </div>
 
       </div>
 
-      <!-- MAIN GRID -->
-      <div class="dashboard-main">
-
-        <!-- EQUITY CURVE -->
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Equity Curve</div>
-              <div class="card-subtitle">Cumulative P&L over time</div>
-            </div>
-            <div class="tabs">
-              <div class="tab-item active">1W</div>
-              <div class="tab-item">1M</div>
-              <div class="tab-item">3M</div>
-              <div class="tab-item">All</div>
-            </div>
+      <!-- TRADING RULES SECTION -->
+      <div class="card" style="margin-top:var(--sp-2)">
+        <div class="card-header">
+          <div>
+            <div class="card-title">📜 Golden Rules</div>
+            <div class="card-subtitle">Non-negotiable trading rules</div>
           </div>
-          <div class="equity-chart-wrap">
-            <svg class="chart-line-svg" viewBox="0 0 600 200" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%"   stop-color="#6C63FF" stop-opacity="0.3"/>
-                  <stop offset="100%" stop-color="#6C63FF" stop-opacity="0"/>
-                </linearGradient>
-              </defs>
-              <path d="M0,180 C30,160 60,140 100,120 C140,100 160,130 200,110 C240,90 260,60 300,50 C340,40 360,70 400,55 C440,40 460,20 500,15 C530,10 570,20 600,10"
-                fill="none" stroke="#6C63FF" stroke-width="2.5" stroke-linecap="round"/>
-              <path d="M0,180 C30,160 60,140 100,120 C140,100 160,130 200,110 C240,90 260,60 300,50 C340,40 360,70 400,55 C440,40 460,20 500,15 C530,10 570,20 600,10 L600,200 L0,200 Z"
-                fill="url(#lineGrad)"/>
-              <circle cx="100" cy="120" r="4" fill="#6C63FF" opacity="0.6"/>
-              <circle cx="300" cy="50"  r="4" fill="#6C63FF" opacity="0.6"/>
-              <circle cx="500" cy="15"  r="5" fill="#00D4AA"/>
-            </svg>
+          <button class="btn btn-ghost btn-sm">Edit Rules</button>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--sp-4)">
+          <div style="padding:var(--sp-4);background:rgba(0,212,170,0.06);border:1px solid rgba(0,212,170,0.15);border-radius:var(--radius-md)">
+            <div style="font-size:var(--fs-lg);margin-bottom:var(--sp-2)">🎯</div>
+            <div style="font-weight:var(--fw-semibold);margin-bottom:var(--sp-1)">Max Risk Per Trade</div>
+            <div style="font-size:var(--fs-sm);color:var(--clr-text-muted)">Never risk more than 1% of account per trade. No exceptions.</div>
+          </div>
+          <div style="padding:var(--sp-4);background:rgba(108,99,255,0.06);border:1px solid rgba(108,99,255,0.15);border-radius:var(--radius-md)">
+            <div style="font-size:var(--fs-lg);margin-bottom:var(--sp-2)">🛑</div>
+            <div style="font-weight:var(--fw-semibold);margin-bottom:var(--sp-1)">Daily Loss Limit</div>
+            <div style="font-size:var(--fs-sm);color:var(--clr-text-muted)">Stop trading if daily loss exceeds 3%. Come back tomorrow.</div>
+          </div>
+          <div style="padding:var(--sp-4);background:rgba(255,179,71,0.06);border:1px solid rgba(255,179,71,0.15);border-radius:var(--radius-md)">
+            <div style="font-size:var(--fs-lg);margin-bottom:var(--sp-2)">⏰</div>
+            <div style="font-weight:var(--fw-semibold);margin-bottom:var(--sp-1)">Trading Hours</div>
+            <div style="font-size:var(--fs-sm);color:var(--clr-text-muted)">Only trade during London & NY sessions. No Asian session trades.</div>
+          </div>
+          <div style="padding:var(--sp-4);background:rgba(255,71,87,0.06);border:1px solid rgba(255,71,87,0.15);border-radius:var(--radius-md)">
+            <div style="font-size:var(--fs-lg);margin-bottom:var(--sp-2)">🧘</div>
+            <div style="font-weight:var(--fw-semibold);margin-bottom:var(--sp-1)">Emotional Check</div>
+            <div style="font-size:var(--fs-sm);color:var(--clr-text-muted)">No revenge trading. If emotional — step away from screen.</div>
           </div>
         </div>
-
-        <!-- WIN RATE -->
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Win Rate</div>
-              <div class="card-subtitle">This month</div>
-            </div>
-          </div>
-          <div class="win-rate-circle">
-            <div class="circle-chart">
-              <svg viewBox="0 0 120 120" width="140" height="140">
-                <defs>
-                  <linearGradient id="circleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%"   stop-color="#6C63FF"/>
-                    <stop offset="100%" stop-color="#00D4AA"/>
-                  </linearGradient>
-                </defs>
-                <circle class="circle-bg" cx="60" cy="60" r="54"/>
-                <circle class="circle-fill" cx="60" cy="60" r="54"/>
-              </svg>
-              <div class="circle-text">
-                <span class="circle-value">68%</span>
-                <span class="circle-label">Win Rate</span>
-              </div>
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-4);width:100%;margin-top:var(--sp-2)">
-              <div style="text-align:center;padding:var(--sp-3);background:rgba(0,212,170,0.08);border-radius:var(--radius-md)">
-                <div style="font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--clr-profit);font-family:var(--font-mono)">32</div>
-                <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Wins</div>
-              </div>
-              <div style="text-align:center;padding:var(--sp-3);background:rgba(255,71,87,0.08);border-radius:var(--radius-md)">
-                <div style="font-size:var(--fs-xl);font-weight:var(--fw-bold);color:var(--clr-loss);font-family:var(--font-mono)">15</div>
-                <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Losses</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- BOTTOM GRID -->
-      <div class="dashboard-bottom">
-
-        <!-- RECENT TRADES -->
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Recent Trades</div>
-              <div class="card-subtitle">Last 5 trades</div>
-            </div>
-            <a href="journal.html" class="btn btn-ghost btn-sm">View All →</a>
-          </div>
-          <div class="table-wrap">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Symbol</th>
-                  <th>Type</th>
-                  <th>Entry</th>
-                  <th>P&L</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <div class="trade-row-symbol">
-                      <div class="symbol-icon">BTC</div>
-                      <div>
-                        <div style="font-weight:var(--fw-semibold)">BTC/USDT</div>
-                        <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Crypto</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td><span class="badge badge-profit">LONG</span></td>
-                  <td class="td-mono">$42,100</td>
-                  <td class="td-mono" style="color:var(--clr-profit)">+$1,240</td>
-                  <td><span class="badge badge-profit">Win</span></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="trade-row-symbol">
-                      <div class="symbol-icon" style="background:rgba(255,71,87,0.1);color:var(--clr-loss)">ETH</div>
-                      <div>
-                        <div style="font-weight:var(--fw-semibold)">ETH/USDT</div>
-                        <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Crypto</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td><span class="badge badge-loss">SHORT</span></td>
-                  <td class="td-mono">$2,280</td>
-                  <td class="td-mono" style="color:var(--clr-loss)">-$320</td>
-                  <td><span class="badge badge-loss">Loss</span></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="trade-row-symbol">
-                      <div class="symbol-icon">AAPL</div>
-                      <div>
-                        <div style="font-weight:var(--fw-semibold)">AAPL</div>
-                        <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Stocks</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td><span class="badge badge-profit">LONG</span></td>
-                  <td class="td-mono">$178.50</td>
-                  <td class="td-mono" style="color:var(--clr-profit)">+$890</td>
-                  <td><span class="badge badge-profit">Win</span></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="trade-row-symbol">
-                      <div class="symbol-icon">EUR</div>
-                      <div>
-                        <div style="font-weight:var(--fw-semibold)">EUR/USD</div>
-                        <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Forex</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td><span class="badge badge-profit">LONG</span></td>
-                  <td class="td-mono">1.0892</td>
-                  <td class="td-mono" style="color:var(--clr-profit)">+$450</td>
-                  <td><span class="badge badge-profit">Win</span></td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="trade-row-symbol">
-                      <div class="symbol-icon" style="background:rgba(255,179,71,0.1);color:var(--clr-warning)">GLD</div>
-                      <div>
-                        <div style="font-weight:var(--fw-semibold)">GOLD</div>
-                        <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Commodity</div>
-                      </div>
-                    </div>
-                  </td>
-                  <td><span class="badge badge-loss">SHORT</span></td>
-                  <td class="td-mono">$1,982</td>
-                  <td class="td-mono" style="color:var(--clr-text-muted)">$0</td>
-                  <td><span class="badge badge-neutral">B/E</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- DAILY PERFORMANCE BARS -->
-        <div class="card">
-          <div class="card-header">
-            <div>
-              <div class="card-title">Daily Performance</div>
-              <div class="card-subtitle">Last 14 days</div>
-            </div>
-          </div>
-          <div class="mini-bars" style="height:120px;align-items:flex-end;padding:0 var(--sp-2)">
-            <div class="mini-bar profit" style="height:60%"></div>
-            <div class="mini-bar loss"   style="height:30%"></div>
-            <div class="mini-bar profit" style="height:80%"></div>
-            <div class="mini-bar profit" style="height:45%"></div>
-            <div class="mini-bar loss"   style="height:25%"></div>
-            <div class="mini-bar profit" style="height:90%"></div>
-            <div class="mini-bar profit" style="height:70%"></div>
-            <div class="mini-bar loss"   style="height:40%"></div>
-            <div class="mini-bar profit" style="height:55%"></div>
-            <div class="mini-bar profit" style="height:85%"></div>
-            <div class="mini-bar loss"   style="height:20%"></div>
-            <div class="mini-bar profit" style="height:75%"></div>
-            <div class="mini-bar profit" style="height:95%"></div>
-            <div class="mini-bar loss"   style="height:35%"></div>
-          </div>
-
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-3);margin-top:var(--sp-5)">
-            <div style="text-align:center">
-              <div style="font-size:var(--fs-lg);font-weight:var(--fw-bold);font-family:var(--font-mono);color:var(--clr-profit)">2.4</div>
-              <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Avg R:R</div>
-            </div>
-            <div style="text-align:center">
-              <div style="font-size:var(--fs-lg);font-weight:var(--fw-bold);font-family:var(--font-mono)">$178</div>
-              <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Avg Win</div>
-            </div>
-            <div style="text-align:center">
-              <div style="font-size:var(--fs-lg);font-weight:var(--fw-bold);font-family:var(--font-mono);color:var(--clr-loss)">$74</div>
-              <div style="font-size:var(--fs-xs);color:var(--clr-text-muted)">Avg Loss</div>
-            </div>
-          </div>
-
-        </div>
-
       </div>
 
     </main>
-
   </div>
-
 </div>
 
-<!-- ═══ ADD TRADE MODAL ═══ -->
-<div class="modal-overlay" id="addTradeModal">
+<!-- ADD STRATEGY MODAL -->
+<div class="modal-overlay" id="addStrategyModal">
   <div class="modal">
     <div class="modal-header">
-      <div class="modal-title">➕ Add New Trade</div>
-      <div class="modal-close" onclick="document.getElementById('addTradeModal').classList.remove('open')">✕</div>
+      <div class="modal-title">📖 New Strategy</div>
+      <div class="modal-close" onclick="document.getElementById('addStrategyModal').classList.remove('open')">✕</div>
     </div>
     <div class="modal-body">
       <div style="display:flex;flex-direction:column;gap:var(--sp-5)">
-
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">Symbol <span>*</span></label>
-            <input type="text" class="form-input" placeholder="e.g. BTC/USDT">
+            <label class="form-label">Strategy Name <span>*</span></label>
+            <input type="text" class="form-input" placeholder="e.g. Breakout Momentum">
           </div>
           <div class="form-group">
             <label class="form-label">Market</label>
@@ -441,100 +405,53 @@
               <option>Forex</option>
               <option>Stocks</option>
               <option>Futures</option>
-              <option>Commodity</option>
             </select>
           </div>
         </div>
-
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">Trade Type</label>
+            <label class="form-label">Timeframe</label>
             <select class="form-select">
-              <option>Long</option>
-              <option>Short</option>
+              <option>Scalp (1-15m)</option>
+              <option>Intraday (15m-4h)</option>
+              <option>Swing (4h-1D)</option>
+              <option>Position (1W+)</option>
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label">Date & Time</label>
-            <input type="datetime-local" class="form-input">
+            <label class="form-label">Target R:R</label>
+            <input type="number" class="form-input" placeholder="e.g. 2.5" step="0.1">
           </div>
         </div>
-
-        <div class="form-row-3">
-          <div class="form-group">
-            <label class="form-label">Entry Price <span>*</span></label>
-            <input type="number" class="form-input" placeholder="0.00">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Exit Price</label>
-            <input type="number" class="form-input" placeholder="0.00">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Position Size</label>
-            <input type="number" class="form-input" placeholder="0.00">
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Stop Loss</label>
-            <input type="number" class="form-input" placeholder="0.00">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Take Profit</label>
-            <input type="number" class="form-input" placeholder="0.00">
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Strategy</label>
-            <select class="form-select">
-              <option>Breakout</option>
-              <option>Trend Follow</option>
-              <option>Mean Reversion</option>
-              <option>Scalping</option>
-              <option>Swing</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Outcome</label>
-            <select class="form-select">
-              <option>Open</option>
-              <option>Win</option>
-              <option>Loss</option>
-              <option>Break Even</option>
-            </select>
-          </div>
-        </div>
-
         <div class="form-group">
-          <label class="form-label">Trade Notes</label>
-          <textarea class="form-textarea" placeholder="Setup analysis, entry reason, market conditions..."></textarea>
+          <label class="form-label">Description</label>
+          <textarea class="form-textarea" placeholder="Describe your strategy setup, conditions, and market environment..."></textarea>
         </div>
-
         <div class="form-group">
-          <label class="form-label">Emotion Rating</label>
-          <div style="display:flex;gap:var(--sp-2)">
-            <span style="font-size:1.5rem;cursor:pointer;filter:grayscale(0.5)" title="Fearful">😰</span>
-            <span style="font-size:1.5rem;cursor:pointer;filter:grayscale(0.5)" title="Uncertain">😟</span>
-            <span style="font-size:1.5rem;cursor:pointer" title="Neutral">😐</span>
-            <span style="font-size:1.5rem;cursor:pointer;filter:grayscale(0.5)" title="Confident">😊</span>
-            <span style="font-size:1.5rem;cursor:pointer;filter:grayscale(0.5)" title="FOMO">🤑</span>
-          </div>
+          <label class="form-label">Entry Rules (one per line)</label>
+          <textarea class="form-textarea" placeholder="e.g.&#10;Volume above 2x average&#10;Price breaks key resistance&#10;Wait for retest"></textarea>
         </div>
-
+        <div class="form-group">
+          <label class="form-label">Exit Rules</label>
+          <textarea class="form-textarea" placeholder="e.g.&#10;Take profit at 2.5R&#10;Trail stop after 1R reached"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Status</label>
+          <select class="form-select">
+            <option>Active</option>
+            <option>Testing</option>
+            <option>Retired</option>
+          </select>
+        </div>
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-secondary" onclick="document.getElementById('addTradeModal').classList.remove('open')">Cancel</button>
-      <button class="btn btn-primary">Save Trade</button>
+      <button class="btn btn-secondary" onclick="document.getElementById('addStrategyModal').classList.remove('open')">Cancel</button>
+      <button class="btn btn-primary">Save Strategy</button>
     </div>
   </div>
 </div>
 
 <script src="js/app.js"></script>
-<script src="js/trades.js"></script>
-<script src="js/charts.js"></script>
 </body>
 </html>
