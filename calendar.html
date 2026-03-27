@@ -3,94 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TradeFlow — Calendar</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📈</text></svg>">
-  <link rel="stylesheet" href="css/variables.css">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/components.css">
-  <style>
-    .cal-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 1px;
-      background: var(--clr-border);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-    }
-    .cal-day-header {
-      background: var(--clr-surface-2);
-      padding: var(--sp-3);
-      text-align: center;
-      font-size: var(--fs-xs);
-      font-weight: var(--fw-semibold);
-      color: var(--clr-text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .cal-day {
-      background: var(--clr-surface);
-      padding: var(--sp-3);
-      min-height: 90px;
-      position: relative;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-    .cal-day:hover { background: var(--clr-surface-2); }
-    .cal-day.other-month { opacity: 0.35; }
-    .cal-day.today {
-      background: rgba(108,99,255,0.08);
-      box-shadow: inset 0 0 0 1.5px var(--clr-accent-purple);
-    }
-    .cal-day-num {
-      font-size: var(--fs-sm);
-      font-weight: var(--fw-semibold);
-      color: var(--clr-text-muted);
-      margin-bottom: var(--sp-2);
-    }
-    .cal-day.today .cal-day-num { color: var(--clr-accent-purple); }
-    .cal-pnl {
-      font-size: var(--fs-xs);
-      font-weight: var(--fw-bold);
-      font-family: var(--font-mono);
-      margin-bottom: var(--sp-1);
-    }
-    .cal-pnl.profit { color: var(--clr-profit); }
-    .cal-pnl.loss   { color: var(--clr-loss);   }
-    .cal-trades-count { font-size: 10px; color: var(--clr-text-muted); }
-    .cal-dot {
-      position: absolute;
-      bottom: var(--sp-2);
-      right: var(--sp-2);
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-    }
-    .cal-dot.profit  { background: var(--clr-profit); }
-    .cal-dot.loss    { background: var(--clr-loss);   }
-    .cal-dot.neutral { background: var(--clr-text-muted); }
-    .cal-nav { display:flex; align-items:center; gap:var(--sp-4); }
-    .cal-nav-btn {
-      width: 32px; height: 32px;
-      border-radius: var(--radius-sm);
-      background: var(--clr-surface-2);
-      border: 1px solid var(--clr-border);
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; font-size: var(--fs-base);
-      transition: background 0.15s;
-    }
-    .cal-nav-btn:hover { background: var(--clr-border); }
-    .cal-month-label {
-      font-size: var(--fs-lg);
-      font-weight: var(--fw-bold);
-      min-width: 160px;
-      text-align: center;
-    }
-  </style>
+  <title>Calendar — TradeLog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="variables.css">
+  <link rel="stylesheet" href="layout.css">
+  <link rel="stylesheet" href="components.css">
 </head>
 <body>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/supabase.js"></script>
 
 <div class="app-layout">
 
@@ -99,87 +19,38 @@
     <div class="sidebar-logo">
       <div class="sidebar-logo-icon">📈</div>
       <div>
-        <div class="sidebar-logo-text">TradeFlow</div>
-        <div class="sidebar-logo-sub">Trading Journal</div>
+        <div class="sidebar-logo-text">TradeLog</div>
+        <div class="sidebar-logo-sub">Pro Trader</div>
       </div>
     </div>
 
     <nav class="sidebar-nav">
       <span class="nav-section-label">Main</span>
-
-      <a href="index.html" class="nav-item" data-page="dashboard">
-        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="3" y="3" width="7" height="7" rx="1"/>
-          <rect x="14" y="3" width="7" height="7" rx="1"/>
-          <rect x="3" y="14" width="7" height="7" rx="1"/>
-          <rect x="14" y="14" width="7" height="7" rx="1"/>
-        </svg>
+      <a href="dashboard.html" class="nav-item">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
         Dashboard
       </a>
-
-      <a href="journal.html" class="nav-item" data-page="journal">
-        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-          <polyline points="14 2 14 8 20 8"/>
-          <line x1="16" y1="13" x2="8" y2="13"/>
-          <line x1="16" y1="17" x2="8" y2="17"/>
-        </svg>
-        Trade Journal
-        <span class="nav-badge">12</span>
+      <a href="journal.html" class="nav-item">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+        Journal
       </a>
-
-      <a href="analytics.html" class="nav-item" data-page="analytics">
-        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-        </svg>
-        Analytics
+      <a href="playbook.html" class="nav-item">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        Playbook
       </a>
-
-      <!-- ✅ ACTIVE — Calendar page -->
-      <a href="calendar.html" class="nav-item active" data-page="calendar">
-        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="3" y="4" width="18" height="18" rx="2"/>
-          <line x1="16" y1="2" x2="16" y2="6"/>
-          <line x1="8" y1="2" x2="8" y2="6"/>
-          <line x1="3" y1="10" x2="21" y2="10"/>
-        </svg>
+      <a href="calendar.html" class="nav-item active">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         Calendar
       </a>
 
-      <span class="nav-section-label" style="margin-top: var(--sp-4)">Tools</span>
-
-      <a href="playbook.html" class="nav-item" data-page="playbook">
-        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-          <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-        </svg>
-        Playbook
-      </a>
-
-      <a href="#" class="nav-item" data-page="watchlist">
-        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-        </svg>
+      <span class="nav-section-label" style="margin-top:8px">Tools</span>
+      <a href="watchlist.html" class="nav-item">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
         Watchlist
       </a>
-
-      <a href="#" class="nav-item" data-page="risk">
-        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-          <line x1="12" y1="9" x2="12" y2="13"/>
-          <line x1="12" y1="17" x2="12.01" y2="17"/>
-        </svg>
+      <a href="risk-manager.html" class="nav-item">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         Risk Manager
-      </a>
-
-      <span class="nav-section-label" style="margin-top: var(--sp-4)">Account</span>
-
-      <a href="settings.html" class="nav-item" data-page="settings">
-        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="3"/>
-          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/>
-        </svg>
-        Settings
       </a>
     </nav>
 
@@ -188,13 +59,8 @@
         <div class="user-avatar">AK</div>
         <div class="user-info">
           <div class="user-name">Ali Khan</div>
-          <div class="user-plan">✦ Pro Plan</div>
+          <div class="user-plan">Pro Plan</div>
         </div>
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--clr-text-muted)">
-          <circle cx="12" cy="12" r="1"/>
-          <circle cx="19" cy="12" r="1"/>
-          <circle cx="5" cy="12" r="1"/>
-        </svg>
       </div>
     </div>
   </aside>
@@ -202,323 +68,335 @@
   <!-- ═══ MAIN CONTENT ═══ -->
   <div class="app-content">
 
+    <!-- TOPBAR -->
     <header class="topbar">
       <div class="topbar-left">
         <div>
           <div class="page-title">Calendar</div>
-          <div class="page-subtitle">Track your daily trading performance 📅</div>
+          <div class="page-subtitle">Track your trading performance by date</div>
         </div>
       </div>
       <div class="topbar-right">
-        <button class="btn btn-ghost btn-sm" id="todayBtn">Today</button>
+        <div class="tabs">
+          <button class="tab active">Month</button>
+          <button class="tab">Week</button>
+          <button class="tab">Heatmap</button>
+        </div>
         <div class="topbar-divider"></div>
-        <button class="btn btn-primary btn-sm" onclick="document.getElementById('addTradeModal').classList.add('open')">
-          + New Trade
-        </button>
+        <button class="topbar-btn">◀</button>
+        <button class="topbar-btn" style="font-size:var(--fs-xs); width:auto; padding:0 var(--sp-md); font-weight:600; color:var(--clr-text-primary)">January 2025</button>
+        <button class="topbar-btn">▶</button>
       </div>
     </header>
 
+    <!-- PAGE CONTENT -->
     <main class="page-content">
 
-      <!-- STATS -->
+      <!-- ── STATS ROW ── -->
       <div class="dashboard-stats">
-        <div class="stat-card">
-          <div class="stat-card-header">
-            <div class="stat-card-icon purple">📅</div>
-          </div>
-          <div class="stat-card-value" style="color:var(--clr-profit)">18</div>
-          <div class="stat-card-label">Green Days</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-header">
-            <div class="stat-card-icon red">📉</div>
-          </div>
-          <div class="stat-card-value" style="color:var(--clr-loss)">6</div>
-          <div class="stat-card-label">Red Days</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-header">
-            <div class="stat-card-icon teal">💰</div>
-            <span class="stat-card-change up">+12.4%</span>
-          </div>
-          <div class="stat-card-value" style="color:var(--clr-profit)">$8,420</div>
-          <div class="stat-card-label">Month P&L</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-card-header">
-            <div class="stat-card-icon orange">🔥</div>
-          </div>
-          <div class="stat-card-value">5</div>
-          <div class="stat-card-label">Win Streak</div>
-        </div>
-      </div>
-
-      <!-- CALENDAR + DETAIL PANEL -->
-      <div style="display:grid;grid-template-columns:1fr 300px;gap:var(--sp-5);align-items:start">
-
-        <div class="card">
-          <div class="card-header" style="margin-bottom:var(--sp-5)">
-            <div class="cal-nav">
-              <div class="cal-nav-btn" id="prevMonth">‹</div>
-              <div class="cal-month-label" id="monthLabel">March 2026</div>
-              <div class="cal-nav-btn" id="nextMonth">›</div>
+        <div class="stat-card profit">
+          <div class="stat-header">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/></svg>
             </div>
-            <div style="display:flex;gap:var(--sp-3);align-items:center;font-size:var(--fs-xs);color:var(--clr-text-muted)">
-              <div style="display:flex;align-items:center;gap:var(--sp-1)">
-                <div style="width:8px;height:8px;border-radius:50%;background:var(--clr-profit)"></div> Profit
-              </div>
-              <div style="display:flex;align-items:center;gap:var(--sp-1)">
-                <div style="width:8px;height:8px;border-radius:50%;background:var(--clr-loss)"></div> Loss
-              </div>
-              <div style="display:flex;align-items:center;gap:var(--sp-1)">
-                <div style="width:8px;height:8px;border-radius:50%;background:var(--clr-text-muted)"></div> B/E
-              </div>
+            <span class="stat-change up">↑ 3 days</span>
+          </div>
+          <div class="stat-value">18</div>
+          <div class="stat-label">Green Days</div>
+        </div>
+
+        <div class="stat-card loss">
+          <div class="stat-header">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/></svg>
+            </div>
+            <span class="stat-change down">↓ 2 days</span>
+          </div>
+          <div class="stat-value">7</div>
+          <div class="stat-label">Red Days</div>
+        </div>
+
+        <div class="stat-card info">
+          <div class="stat-header">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            </div>
+            <span class="stat-change up">↑ 12%</span>
+          </div>
+          <div class="stat-value">+\$4,280</div>
+          <div class="stat-label">Month P&L</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <div class="stat-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+            </div>
+            <span class="stat-change up">↑ 2.1%</span>
+          </div>
+          <div class="stat-value">\$238</div>
+          <div class="stat-label">Avg Day P&L</div>
+        </div>
+      </div>
+
+      <!-- ── CALENDAR GRID ── -->
+      <div class="card" style="padding:0; overflow:hidden">
+
+        <!-- Day Headers -->
+        <div style="display:grid; grid-template-columns:repeat(7,1fr); border-bottom:1px solid var(--clr-border)">
+          <div style="padding:var(--sp-sm) var(--sp-md); font-size:var(--fs-xs); font-weight:600; color:var(--clr-text-muted); text-align:center; text-transform:uppercase; letter-spacing:0.8px">Sun</div>
+          <div style="padding:var(--sp-sm) var(--sp-md); font-size:var(--fs-xs); font-weight:600; color:var(--clr-text-muted); text-align:center; text-transform:uppercase; letter-spacing:0.8px">Mon</div>
+          <div style="padding:var(--sp-sm) var(--sp-md); font-size:var(--fs-xs); font-weight:600; color:var(--clr-text-muted); text-align:center; text-transform:uppercase; letter-spacing:0.8px">Tue</div>
+          <div style="padding:var(--sp-sm) var(--sp-md); font-size:var(--fs-xs); font-weight:600; color:var(--clr-text-muted); text-align:center; text-transform:uppercase; letter-spacing:0.8px">Wed</div>
+          <div style="padding:var(--sp-sm) var(--sp-md); font-size:var(--fs-xs); font-weight:600; color:var(--clr-text-muted); text-align:center; text-transform:uppercase; letter-spacing:0.8px">Thu</div>
+          <div style="padding:var(--sp-sm) var(--sp-md); font-size:var(--fs-xs); font-weight:600; color:var(--clr-text-muted); text-align:center; text-transform:uppercase; letter-spacing:0.8px">Fri</div>
+          <div style="padding:var(--sp-sm) var(--sp-md); font-size:var(--fs-xs); font-weight:600; color:var(--clr-text-muted); text-align:center; text-transform:uppercase; letter-spacing:0.8px">Sat</div>
+        </div>
+
+        <!-- Calendar Days -->
+        <div style="display:grid; grid-template-columns:repeat(7,1fr)">
+
+          <!-- Week 1 — empty days -->
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); opacity:0.3">
+            <span style="font-size:var(--fs-sm); color:var(--clr-text-muted)">29</span>
+          </div>
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); opacity:0.3">
+            <span style="font-size:var(--fs-sm); color:var(--clr-text-muted)">30</span>
+          </div>
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); opacity:0.3">
+            <span style="font-size:var(--fs-sm); color:var(--clr-text-muted)">31</span>
+          </div>
+
+          <!-- Jan 1 — profit day -->
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); background:rgba(0,212,170,0.05); cursor:pointer; transition:background var(--t-fast)">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--sp-xs)">
+              <span style="font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary)">1</span>
+              <span style="font-size:var(--fs-xs); font-weight:700; color:var(--clr-profit); font-family:var(--font-mono)">+\$320</span>
+            </div>
+            <div style="font-size:var(--fs-xs); color:var(--clr-text-muted); margin-bottom:4px">3 trades</div>
+            <div class="progress-bar" style="height:3px">
+              <div class="progress-fill profit" style="width:80%"></div>
             </div>
           </div>
-          <div class="cal-grid" id="calGrid">
-            <div class="cal-day-header">Mon</div>
-            <div class="cal-day-header">Tue</div>
-            <div class="cal-day-header">Wed</div>
-            <div class="cal-day-header">Thu</div>
-            <div class="cal-day-header">Fri</div>
-            <div class="cal-day-header">Sat</div>
-            <div class="cal-day-header">Sun</div>
-          </div>
-        </div>
 
-        <!-- DAY DETAIL -->
-        <div class="card" id="dayDetailPanel">
-          <div class="card-header">
-            <div>
-              <div class="card-title" id="selectedDateLabel">Select a Day</div>
-              <div class="card-subtitle">Daily trade summary</div>
+          <!-- Jan 2 — no trade -->
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); cursor:pointer">
+            <span style="font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary)">2</span>
+          </div>
+
+          <!-- Jan 3 — no trade weekend -->
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); background:var(--clr-bg-elevated); opacity:0.5">
+            <span style="font-size:var(--fs-sm); color:var(--clr-text-muted)">3</span>
+          </div>
+          <div style="min-height:110px; padding:var(--sp-sm); border-bottom:1px solid var(--clr-border); background:var(--clr-bg-elevated); opacity:0.5">
+            <span style="font-size:var(--fs-sm); color:var(--clr-text-muted)">4</span>
+          </div>
+
+          <!-- Week 2 -->
+          <!-- Jan 5 — loss -->
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); background:rgba(255,77,109,0.05); cursor:pointer">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--sp-xs)">
+              <span style="font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary)">5</span>
+              <span style="font-size:var(--fs-xs); font-weight:700; color:var(--clr-loss); font-family:var(--font-mono)">-\$180</span>
+            </div>
+            <div style="font-size:var(--fs-xs); color:var(--clr-text-muted); margin-bottom:4px">2 trades</div>
+            <div class="progress-bar" style="height:3px">
+              <div class="progress-fill loss" style="width:40%"></div>
             </div>
           </div>
-          <div id="dayDetailContent">
-            <div style="text-align:center;padding:var(--sp-8);color:var(--clr-text-muted)">
-              <div style="font-size:2rem;margin-bottom:var(--sp-3)">📅</div>
-              <div style="font-size:var(--fs-sm)">Click a day to see trades</div>
+
+          <!-- Jan 6 — profit -->
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); background:rgba(0,212,170,0.05); cursor:pointer">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--sp-xs)">
+              <span style="font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary)">6</span>
+              <span style="font-size:var(--fs-xs); font-weight:700; color:var(--clr-profit); font-family:var(--font-mono)">+\$540</span>
+            </div>
+            <div style="font-size:var(--fs-xs); color:var(--clr-text-muted); margin-bottom:4px">4 trades</div>
+            <div class="progress-bar" style="height:3px">
+              <div class="progress-fill profit" style="width:90%"></div>
             </div>
           </div>
-        </div>
 
-      </div>
-
-      <!-- HEATMAP -->
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <div class="card-title">Monthly P&L Heatmap</div>
-            <div class="card-subtitle">Daily performance at a glance</div>
+          <!-- Jan 7 — profit -->
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); background:rgba(0,212,170,0.05); cursor:pointer">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--sp-xs)">
+              <span style="font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary)">7</span>
+              <span style="font-size:var(--fs-xs); font-weight:700; color:var(--clr-profit); font-family:var(--font-mono)">+\$210</span>
+            </div>
+            <div style="font-size:var(--fs-xs); color:var(--clr-text-muted); margin-bottom:4px">2 trades</div>
+            <div class="progress-bar" style="height:3px">
+              <div class="progress-fill profit" style="width:70%"></div>
+            </div>
           </div>
-        </div>
-        <div id="heatmapStrip" style="display:flex;gap:4px;flex-wrap:wrap;width:100%"></div>
-        <div style="display:flex;justify-content:space-between;margin-top:var(--sp-3);font-size:var(--fs-xs);color:var(--clr-text-muted)">
-          <span>Loss</span>
-          <div style="display:flex;gap:3px;align-items:center">
-            <div style="width:14px;height:14px;border-radius:2px;background:rgba(255,71,87,0.8)"></div>
-            <div style="width:14px;height:14px;border-radius:2px;background:rgba(255,71,87,0.4)"></div>
-            <div style="width:14px;height:14px;border-radius:2px;background:var(--clr-surface-2)"></div>
-            <div style="width:14px;height:14px;border-radius:2px;background:rgba(0,212,170,0.4)"></div>
-            <div style="width:14px;height:14px;border-radius:2px;background:rgba(0,212,170,0.8)"></div>
+
+          <!-- Jan 8 — no trade -->
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); cursor:pointer">
+            <span style="font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary)">8</span>
           </div>
-          <span>Profit</span>
-        </div>
-      </div>
 
-    </main>
-  </div>
-</div>
-
-<!-- ADD TRADE MODAL -->
-<div class="modal-overlay" id="addTradeModal">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title">➕ Add New Trade</div>
-      <div class="modal-close" onclick="document.getElementById('addTradeModal').classList.remove('open')">✕</div>
-    </div>
-    <div class="modal-body">
-      <div style="display:flex;flex-direction:column;gap:var(--sp-5)">
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Symbol <span>*</span></label>
-            <input type="text" class="form-input" placeholder="e.g. BTC/USDT">
+          <!-- Jan 9 — loss -->
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); background:rgba(255,77,109,0.05); cursor:pointer">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--sp-xs)">
+              <span style="font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary)">9</span>
+              <span style="font-size:var(--fs-xs); font-weight:700; color:var(--clr-loss); font-family:var(--font-mono)">-\$95</span>
+            </div>
+            <div style="font-size:var(--fs-xs); color:var(--clr-text-muted); margin-bottom:4px">1 trade</div>
+            <div class="progress-bar" style="height:3px">
+              <div class="progress-fill loss" style="width:30%"></div>
+            </div>
           </div>
-          <div class="form-group">
-            <label class="form-label">Market</label>
-            <select class="form-select">
-              <option>Crypto</option>
-              <option>Forex</option>
-              <option>Stocks</option>
-              <option>Futures</option>
-            </select>
+
+          <!-- Weekend -->
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); background:var(--clr-bg-elevated); opacity:0.5">
+            <span style="font-size:var(--fs-sm); color:var(--clr-text-muted)">10</span>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Trade Type</label>
-            <select class="form-select">
-              <option>Long</option>
-              <option>Short</option>
-            </select>
+          <div style="min-height:110px; padding:var(--sp-sm); border-bottom:1px solid var(--clr-border); background:var(--clr-bg-elevated); opacity:0.5">
+            <span style="font-size:var(--fs-sm); color:var(--clr-text-muted)">11</span>
           </div>
-          <div class="form-group">
-            <label class="form-label">Date & Time</label>
-            <input type="datetime-local" class="form-input">
+
+          <!-- Week 3 -->
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); background:rgba(0,212,170,0.05); cursor:pointer">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--sp-xs)">
+              <span style="font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary)">12</span>
+              <span style="font-size:var(--fs-xs); font-weight:700; color:var(--clr-profit); font-family:var(--font-mono)">+\$680</span>
+            </div>
+            <div style="font-size:var(--fs-xs); color:var(--clr-text-muted); margin-bottom:4px">5 trades</div>
+            <div class="progress-bar" style="height:3px">
+              <div class="progress-fill profit" style="width:95%"></div>
+            </div>
           </div>
-        </div>
-        <div class="form-row-3">
-          <div class="form-group">
-            <label class="form-label">Entry Price <span>*</span></label>
-            <input type="number" class="form-input" placeholder="0.00">
+
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); background:rgba(0,212,170,0.05); cursor:pointer">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--sp-xs)">
+              <span style="font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary)">13</span>
+              <span style="font-size:var(--fs-xs); font-weight:700; color:var(--clr-profit); font-family:var(--font-mono)">+\$145</span>
+            </div>
+            <div style="font-size:var(--fs-xs); color:var(--clr-text-muted); margin-bottom:4px">2 trades</div>
+            <div class="progress-bar" style="height:3px">
+              <div class="progress-fill profit" style="width:60%"></div>
+            </div>
           </div>
-          <div class="form-group">
-            <label class="form-label">Exit Price</label>
-            <input type="number" class="form-input" placeholder="0.00">
+
+          <!-- Today — Jan 14 highlighted -->
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); background:var(--clr-accent-glow); border-top:2px solid var(--clr-accent); cursor:pointer">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--sp-xs)">
+              <span style="font-size:var(--fs-sm); font-weight:700; color:var(--clr-accent)">14</span>
+              <span style="font-size:var(--fs-xs); font-weight:700; color:var(--clr-profit); font-family:var(--font-mono)">+\$390</span>
+            </div>
+            <div style="font-size:var(--fs-xs); color:var(--clr-text-muted); margin-bottom:4px">3 trades</div>
+            <div class="progress-bar" style="height:3px">
+              <div class="progress-fill profit" style="width:85%"></div>
+            </div>
+            <span class="badge badge-accent" style="margin-top:4px; font-size:10px">Today</span>
           </div>
-          <div class="form-group">
-            <label class="form-label">Position Size</label>
-            <input type="number" class="form-input" placeholder="0.00">
+
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); cursor:pointer">
+            <span style="font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary)">15</span>
           </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Stop Loss</label>
-            <input type="number" class="form-input" placeholder="0.00">
+
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); background:rgba(255,77,109,0.05); cursor:pointer">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--sp-xs)">
+              <span style="font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary)">16</span>
+              <span style="font-size:var(--fs-xs); font-weight:700; color:var(--clr-loss); font-family:var(--font-mono)">-\$220</span>
+            </div>
+            <div style="font-size:var(--fs-xs); color:var(--clr-text-muted); margin-bottom:4px">3 trades</div>
+            <div class="progress-bar" style="height:3px">
+              <div class="progress-fill loss" style="width:35%"></div>
+            </div>
           </div>
-          <div class="form-group">
-            <label class="form-label">Take Profit</label>
-            <input type="number" class="form-input" placeholder="0.00">
+
+          <!-- Weekend -->
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); background:var(--clr-bg-elevated); opacity:0.5">
+            <span style="font-size:var(--fs-sm); color:var(--clr-text-muted)">17</span>
           </div>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Trade Notes</label>
-          <textarea class="form-textarea" placeholder="Setup analysis, entry reason, market conditions..."></textarea>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Outcome</label>
-          <select class="form-select">
-            <option>Open</option>
-            <option>Win</option>
-            <option>Loss</option>
-            <option>Break Even</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn btn-secondary" onclick="document.getElementById('addTradeModal').classList.remove('open')">Cancel</button>
-      <button class="btn btn-primary">Save Trade</button>
-    </div>
-  </div>
-</div>
+          <div style="min-height:110px; padding:var(--sp-sm); border-bottom:1px solid var(--clr-border); background:var(--clr-bg-elevated); opacity:0.5">
+            <span style="font-size:var(--fs-sm); color:var(--clr-text-muted)">18</span>
+          </div>
 
-<script>
-const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+          <!-- Week 4 -->
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); background:rgba(0,212,170,0.05); cursor:pointer">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--sp-xs)">
+              <span style="font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary)">19</span>
+              <span style="font-size:var(--fs-xs); font-weight:700; color:var(--clr-profit); font-family:var(--font-mono)">+\$460</span>
+            </div>
+            <div style="font-size:var(--fs-xs); color:var(--clr-text-muted); margin-bottom:4px">4 trades</div>
+            <div class="progress-bar" style="height:3px">
+              <div class="progress-fill profit" style="width:88%"></div>
+            </div>
+          </div>
 
-const tradeData = {
-  '2026-03-03': { pnl: +840,  trades: 2, type: 'profit' },
-  '2026-03-04': { pnl: -320,  trades: 1, type: 'loss'   },
-  '2026-03-05': { pnl: +1200, trades: 3, type: 'profit' },
-  '2026-03-06': { pnl: +450,  trades: 2, type: 'profit' },
-  '2026-03-09': { pnl: -180,  trades: 1, type: 'loss'   },
-  '2026-03-10': { pnl: +670,  trades: 2, type: 'profit' },
-  '2026-03-11': { pnl: +890,  trades: 3, type: 'profit' },
-  '2026-03-12': { pnl: -240,  trades: 1, type: 'loss'   },
-  '2026-03-13': { pnl: +1100, trades: 4, type: 'profit' },
-  '2026-03-16': { pnl: +560,  trades: 2, type: 'profit' },
-  '2026-03-17': { pnl: -90,   trades: 1, type: 'loss'   },
-  '2026-03-18': { pnl: +780,  trades: 3, type: 'profit' },
-  '2026-03-19': { pnl: +340,  trades: 2, type: 'profit' },
-  '2026-03-20': { pnl: 0,     trades: 1, type: 'neutral'},
-  '2026-03-23': { pnl: +920,  trades: 3, type: 'profit' },
-  '2026-03-24': { pnl: -410,  trades: 2, type: 'loss'   },
-  '2026-03-25': { pnl: +650,  trades: 2, type: 'profit' },
-  '2026-03-26': { pnl: +1340, trades: 4, type: 'profit' },
-  '2026-03-27': { pnl: +480,  trades: 2, type: 'profit' },
-};
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); cursor:pointer">
+            <span style="font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary)">20</span>
+          </div>
 
-let currentDate = new Date(2026, 2, 1);
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); background:rgba(0,212,170,0.05); cursor:pointer">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--sp-xs)">
+              <span style="font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary)">21</span>
+              <span style="font-size:var(--fs-xs); font-weight:700; color:var(--clr-profit); font-family:var(--font-mono)">+\$290</span>
+            </div>
+            <div style="font-size:var(--fs-xs); color:var(--clr-text-muted); margin-bottom:4px">3 trades</div>
+            <div class="progress-bar" style="height:3px">
+              <div class="progress-fill profit" style="width:75%"></div>
+            </div>
+          </div>
 
-function pad(n){ return String(n).padStart(2,'0'); }
-function dateKey(y,m,d){ return `${y}-${pad(m+1)}-${pad(d)}`; }
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); background:rgba(255,77,109,0.05); cursor:pointer">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--sp-xs)">
+              <span style="font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary)">22</span>
+              <span style="font-size:var(--fs-xs); font-weight:700; color:var(--clr-loss); font-family:var(--font-mono)">-\$130</span>
+            </div>
+            <div style="font-size:var(--fs-xs); color:var(--clr-text-muted); margin-bottom:4px">2 trades</div>
+            <div class="progress-bar" style="height:3px">
+              <div class="progress-fill loss" style="width:45%"></div>
+            </div>
+          </div>
 
-function renderCalendar(){
-  const grid = document.getElementById('calGrid');
-  while(grid.children.length > 7) grid.removeChild(grid.lastChild);
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); background:rgba(0,212,170,0.05); cursor:pointer">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--sp-xs)">
+              <span style="font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary)">23</span>
+              <span style="font-size:var(--fs-xs); font-weight:700; color:var(--clr-profit); font-family:var(--font-mono)">+\$175</span>
+            </div>
+            <div style="font-size:var(--fs-xs); color:var(--clr-text-muted); margin-bottom:4px">2 trades</div>
+            <div class="progress-bar" style="height:3px">
+              <div class="progress-fill profit" style="width:65%"></div>
+            </div>
+          </div>
 
-  document.getElementById('monthLabel').textContent =
-    `${months[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+          <!-- Weekend -->
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border); background:var(--clr-bg-elevated); opacity:0.5">
+            <span style="font-size:var(--fs-sm); color:var(--clr-text-muted)">24</span>
+          </div>
+          <div style="min-height:110px; padding:var(--sp-sm); border-bottom:1px solid var(--clr-border); background:var(--clr-bg-elevated); opacity:0.5">
+            <span style="font-size:var(--fs-sm); color:var(--clr-text-muted)">25</span>
+          </div>
 
-  const year  = currentDate.getFullYear();
-  const month = currentDate.getMonth();
+          <!-- Week 5 -->
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); background:rgba(0,212,170,0.05); cursor:pointer">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--sp-xs)">
+              <span style="font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary)">26</span>
+              <span style="font-size:var(--fs-xs); font-weight:700; color:var(--clr-profit); font-family:var(--font-mono)">+\$520</span>
+            </div>
+            <div style="font-size:var(--fs-xs); color:var(--clr-text-muted); margin-bottom:4px">4 trades</div>
+            <div class="progress-bar" style="height:3px">
+              <div class="progress-fill profit" style="width:92%"></div>
+            </div>
+          </div>
 
-  let firstDay = new Date(year, month, 1).getDay();
-  firstDay = (firstDay === 0) ? 6 : firstDay - 1;
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); cursor:pointer">
+            <span style="font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary)">27</span>
+          </div>
 
-  const daysInMonth = new Date(year, month+1, 0).getDate();
-  const daysInPrev  = new Date(year, month, 0).getDate();
-  const today = new Date();
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); background:rgba(0,212,170,0.05); cursor:pointer">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--sp-xs)">
+              <span style="font-size:var(--fs-sm); font-weight:600; color:var(--clr-text-primary)">28</span>
+              <span style="font-size:var(--fs-xs); font-weight:700; color:var(--clr-profit); font-family:var(--font-mono)">+\$340</span>
+            </div>
+            <div style="font-size:var(--fs-xs); color:var(--clr-text-muted); margin-bottom:4px">3 trades</div>
+            <div class="progress-bar" style="height:3px">
+              <div class="progress-fill profit" style="width:80%"></div>
+            </div>
+          </div>
 
-  for(let i = firstDay - 1; i >= 0; i--){
-    grid.appendChild(makeCell(year, month-1, daysInPrev - i, true));
-  }
-  for(let d = 1; d <= daysInMonth; d++){
-    const isToday = (year === today.getFullYear() && month === today.getMonth() && d === today.getDate());
-    grid.appendChild(makeCell(year, month, d, false, isToday));
-  }
-  const total = firstDay + daysInMonth;
-  const remainder = total % 7 === 0 ? 0 : 7 - (total % 7);
-  for(let d = 1; d <= remainder; d++){
-    grid.appendChild(makeCell(year, month+1, d, true));
-  }
-
-  renderHeatmap();
-}
-
-function makeCell(year, month, day, otherMonth, isToday=false){
-  const cell = document.createElement('div');
-  cell.className = 'cal-day' + (otherMonth ? ' other-month' : '') + (isToday ? ' today' : '');
-
-  const key  = dateKey(year, month, day);
-  const data = tradeData[key];
-
-  cell.innerHTML = `<div class="cal-day-num">${day}</div>`;
-
-  if(data && !otherMonth){
-    const sign = data.pnl > 0 ? '+' : '';
-    cell.innerHTML += `
-      <div class="cal-pnl ${data.type}">${sign}$${Math.abs(data.pnl).toLocaleString()}</div>
-      <div class="cal-trades-count">${data.trades} trade${data.trades > 1 ? 's' : ''}</div>
-      <div class="cal-dot ${data.type}"></div>
-    `;
-  }
-
-  cell.addEventListener('click', () => showDayDetail(year, month, day, data));
-  return cell;
-}
-
-function showDayDetail(year, month, day, data){
-  document.getElementById('selectedDateLabel').textContent = `${months[month]} ${day}, ${year}`;
-  const content = document.getElementById('dayDetailContent');
-
-  if(!data){
-    content.innerHTML = `
-      <div style="text-align:center;padding:var(--sp-6);color:var(--clr-text-muted)">
-        <div style="font-size:2rem;margin-bottom:var(--sp-3)">😴</div>
-        <div style="font-size:var(--fs-sm)">No trades this day</div>
-      </div>
-      <button class="btn btn-primary btn-sm" style="width:100%;margin-top:var(--sp-3)"
-        onclick="document.getElementById('addTradeModal').classList.add('open')">+ Add Trade</button>
-    `;
-    return;
-  }
-
-  const pnlColor = data.type === 'profit' ? 'var(--clr-profit)' : data.type === 'loss' ? 'var(--clr-loss)' : 'var(--clr-text-muted)';
-  const sign = data.pnl > 0 ? '+' : '';
-  const resultLabel = data.type === 'profit' ? '✓ Win' : data.type === 'loss' ? '✗ Loss' : '— B/E';
-
-  content.innerHTML = `
-    <div style="display:flex;flex-direction:column;gap:var(--sp-3)">
-      <div style="padding:var(--sp-4);background:var(--clr-surface-2);border-radius:var(--radius-md);text-align:center">
-        <div style="font-size:var(--fs-2xl);font-weight:var(--fw-bold);font-family:var(--font-mono);
+          <div style="min-height:110px; padding:var(--sp-sm); border-right:1px solid var(--clr-border); background:rgba(255,77,109,0.05); cursor:pointer">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:var(--sp-xs)">
+              <span style="font-size:var(
