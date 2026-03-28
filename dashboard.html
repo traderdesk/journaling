@@ -5,29 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TradeLog — Dashboard</title>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
-  <!-- CSS -->
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
 </head>
 
-  <script>
-function toggleSidebar() {
-  const sidebar = document.getElementById('sidebar');
-  const layout  = document.querySelector('.app-layout');
-  sidebar.classList.toggle('collapsed');
-  layout.classList.toggle('sidebar-collapsed');
-}
-</script>
-  
 <body>
 <div class="app-layout">
 
@@ -48,6 +36,16 @@ function toggleSidebar() {
       <div class="sidebar-logo-text">TradeLog</div>
       <div class="sidebar-logo-sub">Trading Journal</div>
     </div>
+
+    <!-- ✅ TOGGLE BUTTON -->
+    <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+        <line x1="3" y1="6"  x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+
   </div>
 
   <!-- Navigation -->
