@@ -7,7 +7,6 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
   <link rel="stylesheet" href="css/variables.css">
@@ -15,6 +14,9 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
 </head>
+
+<body>
+
 <script>
 function toggleSidebar() {
   const sidebar = document.getElementById('sidebar');
@@ -23,7 +25,7 @@ function toggleSidebar() {
   layout.classList.toggle('sidebar-collapsed');
 }
 </script>
-<body>
+
 <div class="app-layout">
 
 <!-- ═══════════════════════════════════════
@@ -31,7 +33,7 @@ function toggleSidebar() {
 ═══════════════════════════════════════ -->
 <aside class="sidebar" id="sidebar">
 
-  <!-- Logo -->
+  <!-- Logo + Toggle -->
   <div class="sidebar-logo">
     <div class="sidebar-logo-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="#6C63FF" stroke-width="2" width="20" height="20">
@@ -43,79 +45,73 @@ function toggleSidebar() {
       <div class="sidebar-logo-text">TradeLog</div>
       <div class="sidebar-logo-sub">Trading Journal</div>
     </div>
-
-    <!-- ✅ TOGGLE BUTTON -->
-    <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">
+    <button class="sidebar-toggle" onclick="toggleSidebar()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
         <line x1="3" y1="6"  x2="21" y2="6"/>
         <line x1="3" y1="12" x2="21" y2="12"/>
         <line x1="3" y1="18" x2="21" y2="18"/>
       </svg>
     </button>
-
   </div>
 
   <!-- Navigation -->
   <nav class="sidebar-nav">
 
-    <!-- ── MAIN ── -->
     <span class="nav-section-label">Main</span>
 
-    <a href="dashboard.html" class="nav-item active">
+    <a href="dashboard.html" class="nav-item active" data-tooltip="Dashboard">
       <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <rect x="3" y="3" width="7" height="7" rx="1"/>
         <rect x="14" y="3" width="7" height="7" rx="1"/>
         <rect x="3" y="14" width="7" height="7" rx="1"/>
         <rect x="14" y="14" width="7" height="7" rx="1"/>
       </svg>
-      Dashboard
+      <span>Dashboard</span>
     </a>
 
-    <a href="journal.html" class="nav-item">
+    <a href="journal.html" class="nav-item" data-tooltip="Journal">
       <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
         <polyline points="14 2 14 8 20 8"/>
         <line x1="16" y1="13" x2="8" y2="13"/>
         <line x1="16" y1="17" x2="8" y2="17"/>
       </svg>
-      Journal
+      <span>Journal</span>
       <span class="nav-badge">6</span>
     </a>
 
-    <a href="analytics.html" class="nav-item">
+    <a href="analytics.html" class="nav-item" data-tooltip="Analytics">
       <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <line x1="18" y1="20" x2="18" y2="10"/>
         <line x1="12" y1="20" x2="12" y2="4"/>
         <line x1="6"  y1="20" x2="6"  y2="14"/>
       </svg>
-      Analytics
+      <span>Analytics</span>
     </a>
 
-    <!-- ── MARKETS ── -->
-    <span class="nav-section-label" style="margin-top:8px">Markets</span>
+    <span class="nav-section-label">Markets</span>
 
-    <a href="forexsession.html" class="nav-item">
+    <a href="forexsession.html" class="nav-item" data-tooltip="Forex Sessions">
       <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <circle cx="12" cy="12" r="10"/>
         <line x1="2" y1="12" x2="22" y2="12"/>
         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
       </svg>
-      Forex Sessions
+      <span>Forex Sessions</span>
     </a>
 
-    <a href="news.html" class="nav-item">
+    <a href="news.html" class="nav-item" data-tooltip="News">
       <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 0-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/>
         <line x1="16" y1="8" x2="10" y2="8"/>
         <line x1="16" y1="12" x2="10" y2="12"/>
       </svg>
-      News
+      <span>News</span>
     </a>
 
-    <!-- ── TOOLS ── -->
-    <span class="nav-section-label" style="margin-top:8px">Tools</span>
+    <span class="nav-section-label">Tools</span>
 
-    <a href="calculator.html" class="nav-item">
+    <a href="calculator.html" class="nav-item" data-tooltip="Risk Calculator">
       <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <rect x="4" y="2" width="16" height="20" rx="2"/>
         <line x1="8"  y1="6"  x2="16" y2="6"/>
@@ -126,96 +122,68 @@ function toggleSidebar() {
         <line x1="8"  y1="18" x2="10" y2="18"/>
         <line x1="14" y1="18" x2="16" y2="18"/>
       </svg>
-      Risk Calculator
+      <span>Risk Calculator</span>
     </a>
 
-    <a href="playbook.html" class="nav-item">
+    <a href="playbook.html" class="nav-item" data-tooltip="Playbook">
       <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
         <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
       </svg>
-      Playbook
+      <span>Playbook</span>
     </a>
 
-    <a href="calendar.html" class="nav-item">
+    <a href="calendar.html" class="nav-item" data-tooltip="Calendar">
       <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <rect x="3" y="4" width="18" height="18" rx="2"/>
         <line x1="16" y1="2" x2="16" y2="6"/>
         <line x1="8"  y1="2" x2="8"  y2="6"/>
         <line x1="3"  y1="10" x2="21" y2="10"/>
       </svg>
-      Calendar
+      <span>Calendar</span>
     </a>
 
-    <!-- ── ACCOUNT ── -->
-    <span class="nav-section-label" style="margin-top:8px">Account</span>
+    <span class="nav-section-label">Account</span>
 
-    <a href="subscription.html" class="nav-item">
+    <a href="subscription.html" class="nav-item" data-tooltip="Subscription">
       <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
         <polyline points="9 12 11 14 15 10"/>
       </svg>
-      Subscription
+      <span>Subscription</span>
     </a>
 
-    <a href="settings.html" class="nav-item">
+    <a href="settings.html" class="nav-item" data-tooltip="Settings">
       <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <circle cx="12" cy="12" r="3"/>
         <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
       </svg>
-      Settings
+      <span>Settings</span>
     </a>
 
   </nav>
 
-  <!-- Footer — User + Logout -->
- <!-- Sidebar Footer -->
-<div class="sidebar-footer">
-  <div class="sidebar-user">
-    <div class="user-avatar">JD</div>
-    <div class="user-info">
-      <div class="user-name">John Doe</div>
-      <div class="user-plan">Pro Plan</div>
+  <!-- ✅ FOOTER -->
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="user-avatar">JD</div>
+      <div class="user-info">
+        <div class="user-name">John Doe</div>
+        <div class="user-plan">Pro Plan</div>
+      </div>
     </div>
+    <button class="logout-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" width="16" height="16" style="flex-shrink:0">
+        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+        <polyline points="16 17 21 12 16 7"/>
+        <line x1="21" y1="12" x2="9" y2="12"/>
+      </svg>
+      <span>Logout</span>
+    </button>
   </div>
-  <button class="logout-btn">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-         stroke-width="2" width="16" height="16" style="flex-shrink:0">
-      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-      <polyline points="16 17 21 12 16 7"/>
-      <line x1="21" y1="12" x2="9" y2="12"/>
-    </svg>
-    <span>Logout</span>
-  </button>
-</div>
 
 </aside>
-    <!-- Footer — User + Logout -->
-    <div class="sidebar-footer">
-      <div class="sidebar-user">
-        <div class="user-avatar">JD</div>
-        <div class="user-info">
-          <div class="user-name">John Doe</div>
-          <div class="user-plan">Pro Plan</div>
-        </div>
-      </div>
-
-      <!-- Logout Button -->
-      <button
-        class="btn btn-ghost w-full"
-        style="margin-top:8px; justify-content:flex-start; color:var(--clr-loss); gap:10px;"
-        onclick="showToast('info','Logged out','See you next time!')"
-      >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-          <polyline points="16 17 21 12 16 7"/>
-          <line x1="21" y1="12" x2="9" y2="12"/>
-        </svg>
-        Logout
-      </button>
-    </div>
-
-  </aside>
 
   <!-- ═══════════════════════════════════════
        APP CONTENT
