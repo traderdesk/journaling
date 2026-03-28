@@ -12,6 +12,16 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
 </head>
+  <script>
+  // Auto-detect active nav item
+  const currentPage = window.location.pathname.split('/').pop() || 'dashboard.html';
+  document.querySelectorAll('.nav-item').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === currentPage) {
+      link.classList.add('active');
+    }
+  });
+</script>
 <body>
 
 <div class="app-layout">
