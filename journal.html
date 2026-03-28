@@ -397,22 +397,26 @@ function toggleSidebar() {
     <div class="modal-body">
       <div style="display:flex;flex-direction:column;gap:var(--sp-4)">
 
+        <!-- DIRECTION -->
         <div class="form-group">
           <label class="form-label">Direction <span style="color:var(--clr-loss)">*</span></label>
-          <div style="display:flex;gap:var(--sp-3)">
-            <label style="display:flex;align-items:center;gap:var(--sp-2);cursor:pointer;
-                          padding:var(--sp-2) var(--sp-4);border:1px solid var(--clr-profit);
-                          border-radius:var(--r-sm);color:var(--clr-profit);font-size:var(--fs-sm)">
-              <input type="radio" name="dir2" value="long" checked style="accent-color:var(--clr-profit)"> ▲ Long
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3)">
+            
+            <label class="dir-btn dir-long">
+              <input type="radio" name="dir2" value="long" checked hidden>
+              <span class="dir-icon">▲</span>
+              <span>Long</span>
             </label>
-            <label style="display:flex;align-items:center;gap:var(--sp-2);cursor:pointer;
-                          padding:var(--sp-2) var(--sp-4);border:1px solid var(--clr-loss);
-                          border-radius:var(--r-sm);color:var(--clr-loss);font-size:var(--fs-sm)">
-              <input type="radio" name="dir2" value="short" style="accent-color:var(--clr-loss)"> ▼ Short
+            
+            <label class="dir-btn dir-short">
+              <input type="radio" name="dir2" value="short" hidden>
+              <span class="dir-icon">▼</span>
+              <span>Short</span>
             </label>
           </div>
         </div>
 
+        <!-- SYMBOL + ASSET -->
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Symbol <span style="color:var(--clr-loss)">*</span></label>
@@ -427,6 +431,7 @@ function toggleSidebar() {
           </div>
         </div>
 
+        <!-- ENTRY + EXIT PRICE -->
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Entry Price <span style="color:var(--clr-loss)">*</span></label>
@@ -438,6 +443,7 @@ function toggleSidebar() {
           </div>
         </div>
 
+        <!-- SIZE + STOP LOSS -->
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Size <span style="color:var(--clr-loss)">*</span></label>
@@ -449,6 +455,7 @@ function toggleSidebar() {
           </div>
         </div>
 
+        <!-- ENTRY + EXIT DATE -->
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Entry Date <span style="color:var(--clr-loss)">*</span></label>
@@ -460,6 +467,7 @@ function toggleSidebar() {
           </div>
         </div>
 
+        <!-- STRATEGY + EMOTION -->
         <div class="form-row">
           <div class="form-group">
             <label class="form-label">Strategy</label>
@@ -481,6 +489,7 @@ function toggleSidebar() {
           </div>
         </div>
 
+        <!-- NOTES -->
         <div class="form-group">
           <label class="form-label">Notes</label>
           <textarea class="form-textarea" id="jNotes"
