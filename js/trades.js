@@ -204,18 +204,18 @@ const TradesDB = (() => {
     const wins   = closed.filter(t => calcPnL(t) > 0);
     const losses = closed.filter(t => calcPnL(t) < 0);
 
-    const totalPnL    = closed.reduce((s, t) => s + calcPnL(t), 0);
-    const grossProfit = wins.reduce((s, t) => s + calcPnL(t), 0);
-    const grossLoss   = Math.abs(losses.reduce((s, t) => s + calcPnL(t), 0));
-    const winRate     = closed.length ? (wins.length / closed.length) * 100 : 0;
-    const profitFactor= grossLoss > 0 ? grossProfit / grossLoss : grossProfit > 0 ? Infinity : 0;
-    const avgWin      = wins.length ? grossProfit / wins.length : 0;
-    const avgLoss     = losses.length ? grossLoss / losses.length : 0;
+    const totalPnL     = closed.reduce((s, t) => s + calcPnL(t), 0);
+    const grossProfit  = wins.reduce((s, t) => s + calcPnL(t), 0);
+    const grossLoss    = Math.abs(losses.reduce((s, t) => s + calcPnL(t), 0));
+    const winRate      = closed.length ? (wins.length / closed.length) * 100 : 0;
+    const profitFactor = grossLoss > 0 ? grossProfit / grossLoss : grossProfit > 0 ? Infinity : 0;
+    const avgWin       = wins.length ? grossProfit / wins.length : 0;
+    const avgLoss      = losses.length ? grossLoss / losses.length : 0;
 
     const rValues = closed.map(t => calcR(t)).filter(r => r !== null);
-    const avgR    = rValues.length ? rValues.reduce((a,b) => a+b, 0) / rValues.length : 0;
+    const avgR    = rValues.length ? rValues.reduce((a, b) => a + b, 0) / rValues.length : 0;
 
-    const pnlValues   = closed.map(t => calcPnL(t));
+    const pnlValues = closed.map(t => calcPnL(t));
     let maxDD = 0, peak = 0, running = 0;
     pnlValues.forEach(p => {
       running += p;
@@ -246,7 +246,7 @@ const TradesDB = (() => {
   function getEquityCurve(trades) {
     const closed = trades
       .filter(t => t.status === 'closed' && t.exitDate)
-      .sort((a,b) => new Date(a.exitDate) - new Date(b.exitDate));
+      .sort((a, b) => new Date(a.exitDate) - new Date(b.exitDate));
 
     let running = 0;
     return closed.map(t => {
@@ -268,37 +268,74 @@ const TradesDB = (() => {
     });
     return Object.entries(map).map(([name, d]) => ({
       name,
-      trades: d.trades,
-      pnl: +d.pnl.toFixed(2),
-      winRate: d.trades ? +((d.wins / d.trades)*100).toFixed(1) : 0
-    })).sort((a,b) => b.pnl - a.pnl);
+      trades:  d.trades,
+      pnl:     +d.pnl.toFixed(2),
+      winRate: d.trades ? +((d.wins / d.trades) * 100).toFixed(1) : 0
+    })).sort((a, b) => b.pnl - a.pnl);
   }
 
   /* ── FILTER ── */
+  /* 
+    Dropdown values jo HTML mein hain:
+    Direction  → 'long' | 'short'         (ya '' for all)
+    Result     → 'win' | 'loss' | 'be' | 'open'  (ya '' for all)
+    Strategy   → exact string             (ya '' for all)
+    Asset      → exact string             (ya '' for all)
+    Search     → free text
+    dateFrom   → 'YYYY-MM-DD'
+    dateTo     → 'YYYY-MM-DD'
+  */
   function filter(trades, filters = {}) {
     return trades.filter(t => {
-      if (filters.direction && t.direction !== filters.direction) return false;
-      if (filters.asset && t.asset !== filters.asset) return false;
-      if (filters.strategy && t.strategy !== filters.strategy) return false;
-      if (filters.result) {
+
+      /* Direction — skip if empty or placeholder */
+      if (filters.direction && filters.direction !== '') {
+        if (t.direction !== filters.direction) return false;
+      }
+
+      /* Asset */
+      if (filters.asset && filters.asset !== '') {
+        if (t.asset !== filters.asset) return false;
+      }
+
+      /* Strategy */
+      if (filters.strategy && filters.strategy !== '') {
+        if (t.strategy !== filters.strategy) return false;
+      }
+
+      /* Result */
+      if (filters.result && filters.result !== '') {
         const r = getResult(t);
-        if (filters.result === 'win'  && r !== 'win')  return false;
-        if (filters.result === 'loss' && r !== 'loss') return false;
-        if (filters.result === 'open' && r !== 'open') return false;
-        if (filters.result === 'be'   && r !== 'be')   return false;
+        if (r !== filters.result) return false;
       }
-      if (filters.search) {
-        const q = filters.search.toLowerCase();
-        if (!t.symbol.toLowerCase().includes(q) &&
-            !(t.strategy||'').toLowerCase().includes(q) &&
-            !(t.notes||'').toLowerCase().includes(q)) return false;
+
+      /* Search — symbol, strategy, notes */
+      if (filters.search && filters.search.trim() !== '') {
+        const q = filters.search.toLowerCase().trim();
+        const inSymbol   = t.symbol.toLowerCase().includes(q);
+        const inStrategy = (t.strategy || '').toLowerCase().includes(q);
+        const inNotes    = (t.notes || '').toLowerCase().includes(q);
+        const inTags     = (t.tags || []).some(tag => tag.toLowerCase().includes(q));
+        if (!inSymbol && !inStrategy && !inNotes && !inTags) return false;
       }
-      if (filters.dateFrom && t.entryDate < filters.dateFrom) return false;
-      if (filters.dateTo   && t.entryDate > filters.dateTo)   return false;
+
+      /* Date range */
+      if (filters.dateFrom && filters.dateFrom !== '') {
+        if (t.entryDate < filters.dateFrom) return false;
+      }
+      if (filters.dateTo && filters.dateTo !== '') {
+        if (t.entryDate > filters.dateTo) return false;
+      }
+
       return true;
     });
   }
 
-  return { getAll, getById, add, update, remove, calcPnL, calcR, calcPct, getResult, getStats, getEquityCurve, getStrategyStats, filter };
+  return {
+    getAll, getById, add, update, remove,
+    calcPnL, calcR, calcPct, getResult,
+    getStats, getEquityCurve, getStrategyStats,
+    filter
+  };
 
 })();
