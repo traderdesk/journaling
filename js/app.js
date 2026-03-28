@@ -353,3 +353,51 @@ if (document.getElementById('tradesBody')) {
     renderTradesTable({ search: e.target.value });
   });
 }
+
+/* ── RESET FILTERS ── */
+function resetFilters() {
+  document.querySelectorAll('.filter-bar .form-select').forEach(sel => sel.selectedIndex = 0);
+  document.querySelectorAll('.filter-bar input[type="date"]').forEach(inp => inp.value = '');
+  const search = document.getElementById('tradeSearch');
+  if (search) search.value = '';
+  renderTradesTable();
+  showToast('info', 'Filters Reset', 'Showing all trades');
+}
+
+/* ── INIT JOURNAL PAGE ── */
+if (document.getElementById('tradesBody')) {
+  renderTradesTable();
+
+  /* Search */
+  document.getElementById('tradeSearch')?.addEventListener('input', e => {
+    getActiveFilters();
+  });
+
+  /* Filter selects live change */
+  document.querySelectorAll('.filter-bar .form-select').forEach(sel => {
+    sel.addEventListener('change', () => getActiveFilters());
+  });
+
+  /* Date filters */
+  document.querySelectorAll('.filter-bar input[type="date"]').forEach(inp => {
+    inp.addEventListener('change', () => getActiveFilters());
+  });
+}
+
+/* ── GET ACTIVE FILTERS ── */
+function getActiveFilters() {
+  const selects = document.querySelectorAll('.filter-bar .form-select');
+  const dates   = document.querySelectorAll('.filter-bar input[type="date"]');
+
+  const filters = {
+    search:    document.getElementById('tradeSearch')?.value || '',
+    direction: selects[0]?.value || '',
+    result:    selects[1]?.value || '',
+    strategy:  selects[2]?.value || '',
+    asset:     selects[3]?.value || '',
+    dateFrom:  dates[0]?.value   || '',
+    dateTo:    dates[1]?.value   || '',
+  };
+
+  renderTradesTable(filters);
+}
