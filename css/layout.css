@@ -12,7 +12,7 @@
 /* ═══════════════════════════════════════
    SIDEBAR
 ═══════════════════════════════════════ */
-sidebar {
+.sidebar {
   width: var(--sidebar-width);
   background: var(--clr-bg-surface);
   border-right: 1px solid var(--clr-border);
@@ -24,6 +24,7 @@ sidebar {
   flex-direction: column;
   z-index: 100;
   transition: width var(--t-normal);
+  overflow: hidden;
 }
 
 /* ── Logo ── */
@@ -45,7 +46,6 @@ sidebar {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
   flex-shrink: 0;
 }
 
@@ -65,12 +65,12 @@ sidebar {
 /* ── Nav ── */
 .sidebar-nav {
   flex: 1;
-  overflow-y: auto;        
+  overflow-y: auto;
   padding: var(--sp-md) var(--sp-sm);
   display: flex;
   flex-direction: column;
   gap: 2px;
-  min-height: 0;          
+  min-height: 0;
 }
 
 .sidebar-nav::-webkit-scrollbar { width: 0; }
@@ -148,8 +148,7 @@ sidebar {
 .sidebar-footer {
   padding: var(--sp-md);
   border-top: 1px solid var(--clr-border);
-  flex-shrink: 0;         
-  margin-top: auto;        
+  flex-shrink: 0;
 }
 
 .sidebar-user {
@@ -270,7 +269,7 @@ sidebar {
   border-color: var(--clr-border-focus);
 }
 
-.search-icon { font-size: 14px; flex-shrink: 0; }
+.search-icon { flex-shrink: 0; }
 
 .search-input {
   background: none;
@@ -300,14 +299,15 @@ sidebar {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 16px;
   transition: all var(--t-fast);
   flex-shrink: 0;
+  color: var(--clr-text-secondary);
 }
 
 .topbar-btn:hover {
   background: var(--clr-bg-hover);
   border-color: rgba(255,255,255,0.12);
+  color: var(--clr-text-primary);
 }
 
 .notif-dot {
@@ -335,22 +335,18 @@ sidebar {
 /* ═══════════════════════════════════════
    DASHBOARD GRIDS
 ═══════════════════════════════════════ */
-
-/* ── Stat Cards Row ── */
 .dashboard-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--sp-md);
 }
 
-/* ── Main 2-col Grid ── */
 .dashboard-main {
   display: grid;
   grid-template-columns: 1fr 320px;
   gap: var(--sp-md);
 }
 
-/* ── Bottom 2-col Grid ── */
 .dashboard-bottom {
   display: grid;
   grid-template-columns: 1fr 380px;
@@ -358,7 +354,7 @@ sidebar {
 }
 
 /* ═══════════════════════════════════════
-   STAT CARD (Dashboard specific)
+   STAT CARD
 ═══════════════════════════════════════ */
 .stat-card-header {
   display: flex;
@@ -374,7 +370,6 @@ sidebar {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
 }
 
 .stat-card-icon.purple { background: rgba(108,99,255,0.15); }
@@ -387,6 +382,9 @@ sidebar {
   font-weight: 600;
   padding: 3px 8px;
   border-radius: var(--r-full);
+  display: flex;
+  align-items: center;
+  gap: 3px;
 }
 
 .stat-card-change.up {
@@ -416,19 +414,8 @@ sidebar {
 }
 
 /* ═══════════════════════════════════════
-   EQUITY CHART
+   TABS
 ═══════════════════════════════════════ */
-.equity-chart-wrap {
-  height: 200px;
-  width: 100%;
-}
-
-.chart-line-svg {
-  width: 100%;
-  height: 100%;
-}
-
-/* ── Tabs (in card header) ── */
 .tabs {
   display: flex;
   gap: 2px;
@@ -438,7 +425,7 @@ sidebar {
   padding: 3px;
 }
 
-.tab-item {
+.tab {
   padding: 5px 12px;
   border-radius: calc(var(--r-md) - 2px);
   font-size: var(--fs-xs);
@@ -446,88 +433,33 @@ sidebar {
   color: var(--clr-text-muted);
   cursor: pointer;
   transition: all var(--t-fast);
+  background: none;
+  border: none;
 }
 
-.tab-item:hover { color: var(--clr-text-primary); }
+.tab:hover { color: var(--clr-text-primary); }
 
-.tab-item.active {
+.tab.active {
   background: var(--clr-bg-surface);
   color: var(--clr-text-primary);
   box-shadow: 0 1px 4px rgba(0,0,0,0.3);
 }
 
 /* ═══════════════════════════════════════
-   WIN RATE CIRCLE
+   CHART CONTAINERS
 ═══════════════════════════════════════ */
-.win-rate-circle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--sp-md);
-}
-
-.circle-chart {
+.equity-chart-wrap {
+  width: 100%;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.circle-bg {
-  fill: none;
-  stroke: var(--clr-bg-elevated);
-  stroke-width: 10;
-}
-
-.circle-fill {
-  fill: none;
-  stroke: url(#circleGradient);
-  stroke-width: 10;
-  stroke-linecap: round;
-  stroke-dasharray: 339.3;
-  stroke-dashoffset: 108.6; /* 339.3 * (1 - 0.68) */
-  transform: rotate(-90deg);
-  transform-origin: center;
-  transition: stroke-dashoffset 1s ease;
-}
-
-.circle-text {
-  position: absolute;
-  text-align: center;
-}
-
-.circle-value {
-  display: block;
-  font-size: var(--fs-xl);
-  font-weight: 800;
-  font-family: var(--font-mono);
-  color: var(--clr-text-primary);
-  letter-spacing: -1px;
-}
-
-.circle-label {
-  display: block;
-  font-size: var(--fs-xs);
-  color: var(--clr-text-muted);
-  margin-top: 2px;
+.chart-container {
+  width: 100%;
+  position: relative;
 }
 
 /* ═══════════════════════════════════════
-   RECENT TRADES TABLE
-═══════════════════════════════════════ */
-.trade-row-symbol {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-sm);
-}
-
-.td-mono {
-  font-family: var(--font-mono);
-  font-size: var(--fs-sm);
-}
-
-/* ═══════════════════════════════════════
-   MINI BARS (Daily Performance)
+   MINI BARS
 ═══════════════════════════════════════ */
 .mini-bars {
   display: flex;
@@ -557,15 +489,9 @@ sidebar {
    RESPONSIVE
 ═══════════════════════════════════════ */
 @media (max-width: 1200px) {
-  .dashboard-stats {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .dashboard-main {
-    grid-template-columns: 1fr;
-  }
-  .dashboard-bottom {
-    grid-template-columns: 1fr;
-  }
+  .dashboard-stats  { grid-template-columns: repeat(2, 1fr); }
+  .dashboard-main   { grid-template-columns: 1fr; }
+  .dashboard-bottom { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
@@ -576,28 +502,14 @@ sidebar {
   .sidebar.open {
     transform: translateX(0);
   }
-  .app-content {
-    margin-left: 0;
-  }
-  .topbar {
-    padding: 0 var(--sp-md);
-  }
-  .page-content {
-    padding: var(--sp-md);
-  }
-  .dashboard-stats {
-    grid-template-columns: 1fr 1fr;
-  }
-  .search-bar {
-    display: none;
-  }
-  .form-row {
-    grid-template-columns: 1fr;
-  }
+  .app-content  { margin-left: 0; }
+  .topbar       { padding: 0 var(--sp-md); }
+  .page-content { padding: var(--sp-md); }
+  .dashboard-stats { grid-template-columns: 1fr 1fr; }
+  .search-bar   { display: none; }
+  .form-row     { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
-  .dashboard-stats {
-    grid-template-columns: 1fr;
-  }
+  .dashboard-stats { grid-template-columns: 1fr; }
 }
