@@ -12,19 +12,14 @@
 /* ═══════════════════════════════════════
    SIDEBAR
 ═══════════════════════════════════════ */
-.sidebar {
-  width: var(--sidebar-width);
-  background: var(--clr-bg-surface);
-  border-right: 1px solid var(--clr-border);
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;      
+  padding: var(--sp-md) var(--sp-sm);
   display: flex;
   flex-direction: column;
-  z-index: 100;
-  transition: width var(--t-normal);
-  overflow: hidden;
+  gap: 2px;
+  min-height: 0;           
 }
 
 /* ── Logo ── */
