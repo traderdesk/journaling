@@ -332,28 +332,32 @@ function renderTradesTable(filtersOverride = {}) {
 
 /* ── GET ACTIVE FILTERS ── */
 function getActiveFilters() {
-  const selects = document.querySelectorAll('.filter-bar .form-select');
-  const dates   = document.querySelectorAll('.filter-bar input[type="date"]');
-
   const filters = {
-    search:    document.getElementById('tradeSearch')?.value    || '',
-    direction: selects[0]?.value || '',
-    result:    selects[1]?.value || '',
-    strategy:  selects[2]?.value || '',
-    asset:     selects[3]?.value || '',
-    dateFrom:  dates[0]?.value   || '',
-    dateTo:    dates[1]?.value   || '',
+    direction: document.getElementById('fDirection')?.value  || '',
+    result:    document.getElementById('fResult')?.value     || '',
+    strategy:  document.getElementById('fStrategy')?.value   || '',
+    asset:     document.getElementById('fAsset')?.value      || '',
+    dateFrom:  document.getElementById('fDateFrom')?.value   || '',
+    dateTo:    document.getElementById('fDateTo')?.value     || '',
+    search:    document.getElementById('tradeSearch')?.value || '',
   };
 
+  console.log('Filters:', filters); // debug — baad mein hata dena
   renderTradesTable(filters);
 }
 
 /* ── RESET FILTERS ── */
 function resetFilters() {
-  document.querySelectorAll('.filter-bar .form-select').forEach(sel => sel.selectedIndex = 0);
-  document.querySelectorAll('.filter-bar input[type="date"]').forEach(inp => inp.value = '');
+  document.getElementById('fDirection').selectedIndex = 0;
+  document.getElementById('fResult').selectedIndex    = 0;
+  document.getElementById('fStrategy').selectedIndex  = 0;
+  document.getElementById('fAsset').selectedIndex     = 0;
+  document.getElementById('fDateFrom').value          = '';
+  document.getElementById('fDateTo').value            = '';
+
   const search = document.getElementById('tradeSearch');
   if (search) search.value = '';
+
   renderTradesTable();
   showToast('info', 'Filters Reset', 'Showing all trades');
 }
