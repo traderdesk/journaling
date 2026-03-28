@@ -19,20 +19,21 @@
   <link rel="stylesheet" href="css/components.css">
 </head>
 
+  <script>
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const layout  = document.querySelector('.app-layout');
+  sidebar.classList.toggle('collapsed');
+  layout.classList.toggle('sidebar-collapsed');
+}
+</script>
+  
 <body>
 <div class="app-layout">
 
 <!-- ═══════════════════════════════════════
      SIDEBAR
 ═══════════════════════════════════════ -->
-
-  <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
-    <line x1="3" y1="12" x2="21" y2="12"/>
-    <line x1="3" y1="6"  x2="21" y2="6"/>
-    <line x1="3" y1="18" x2="21" y2="18"/>
-  </svg>
-</button>
 <aside class="sidebar" id="sidebar">
 
   <!-- Logo -->
