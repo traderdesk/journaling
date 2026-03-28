@@ -3,8 +3,8 @@
 ═══════════════════════════════════════ */
 
 /* ── SIDEBAR COLLAPSE ── */
-const sidebar    = document.getElementById('sidebar');
-const collapseBtn= document.getElementById('collapseBtn');
+const sidebar     = document.getElementById('sidebar');
+const collapseBtn = document.getElementById('collapseBtn');
 
 if (collapseBtn) {
   collapseBtn.addEventListener('click', () => {
@@ -13,7 +13,6 @@ if (collapseBtn) {
   });
 }
 
-/* Restore sidebar state */
 if (sidebar && localStorage.getItem('sidebar_collapsed') === 'true') {
   sidebar.classList.add('collapsed');
 }
@@ -22,14 +21,12 @@ if (sidebar && localStorage.getItem('sidebar_collapsed') === 'true') {
 function openModal(id)  { document.getElementById(id)?.classList.add('open'); }
 function closeModal(id) { document.getElementById(id)?.classList.remove('open'); }
 
-/* Close modal on overlay click */
 document.querySelectorAll('.modal-overlay').forEach(overlay => {
   overlay.addEventListener('click', e => {
     if (e.target === overlay) overlay.classList.remove('open');
   });
 });
 
-/* Close on Escape */
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     document.querySelectorAll('.modal-overlay.open').forEach(m => m.classList.remove('open'));
@@ -46,7 +43,6 @@ function openTradeDrawer(idOrSymbol) {
 
   if (!drawer) return;
 
-  /* Find trade */
   const trades = TradesDB?.getAll() || [];
   const trade  = trades.find(t => t.id === idOrSymbol || t.symbol === idOrSymbol);
 
@@ -75,7 +71,6 @@ function openTradeDrawer(idOrSymbol) {
         ${trade.strategy ? `<span class="badge badge-accent">${trade.strategy}</span>` : ''}
       </div>
 
-      <!-- P&L Hero -->
       <div style="background:var(--clr-bg-elevated);border:1px solid var(--clr-border);border-radius:var(--r-lg);padding:20px;text-align:center;margin-bottom:20px">
         <div style="font-size:var(--fs-3xl);font-weight:800;font-family:var(--font-mono);color:${pnlColor}">
           ${pnl !== null ? pnlSign + '$' + Math.abs(pnl).toFixed(2) : '—'}
@@ -86,7 +81,6 @@ function openTradeDrawer(idOrSymbol) {
         </div>
       </div>
 
-      <!-- Trade Info -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px">
         ${infoBox('Entry', '$' + trade.entryPrice)}
         ${infoBox('Exit', trade.exitPrice ? '$' + trade.exitPrice : 'Open')}
@@ -203,7 +197,7 @@ function removeTag(btn) {
   btn.closest('.tag-item')?.remove();
 }
 
-/* ── SAVE TRADE (journal.html) ── */
+/* ── SAVE TRADE ── */
 function saveTrade() {
   const direction = document.querySelector('input[name="dir2"]:checked')?.value || 'long';
   const symbol    = document.getElementById('jSymbol')?.value.trim().toUpperCase();
@@ -218,11 +212,10 @@ function saveTrade() {
   const emotion   = document.getElementById('jEmotion')?.value || '';
   const notes     = document.getElementById('jNotes')?.value || '';
 
-  /* Validation */
-  if (!symbol) return showToast('error', 'Symbol required', 'Please enter a trading symbol.');
+  if (!symbol)              return showToast('error', 'Symbol required', 'Please enter a trading symbol.');
   if (!entry || isNaN(entry)) return showToast('error', 'Entry price required', 'Please enter a valid entry price.');
   if (!size  || isNaN(size))  return showToast('error', 'Size required', 'Please enter position size.');
-  if (!entryDate) return showToast('error', 'Entry date required', 'Please select an entry date.');
+  if (!entryDate)           return showToast('error', 'Entry date required', 'Please select an entry date.');
 
   const trade = {
     symbol, asset, direction, strategy, emotion, notes, tags: [],
@@ -235,8 +228,6 @@ function saveTrade() {
   TradesDB.add(trade);
   closeModal('addTradeModal');
   showToast('success', 'Trade saved!', `${symbol} trade has been added to your journal.`);
-
-  /* Refresh table if on journal page */
   if (typeof renderTradesTable === 'function') renderTradesTable();
 }
 
@@ -257,20 +248,18 @@ function editTrade(id) {
 /* ── RATING STARS ── */
 document.querySelectorAll('.rating-input').forEach(container => {
   const stars = container.querySelectorAll('.rating-star');
-  stars.forEach((star, idx) => {
+  stars.forEach((star) => {
     star.addEventListener('click', () => {
       const val = parseInt(star.dataset.val);
-      stars.forEach((s, i) => {
-        s.classList.toggle('active', i < val);
-      });
+      stars.forEach((s, i) => s.classList.toggle('active', i < val));
       container.dataset.value = val;
     });
   });
 });
 
-/* ── RENDER TRADES TABLE (journal.html) ── */
+/* ── RENDER TRADES TABLE ── */
 function renderTradesTable(filtersOverride = {}) {
-  const tbody = document.getElementById('tradesBody');
+  const tbody      = document.getElementById('tradesBody');
   const emptyState = document.getElementById('emptyState');
   if (!tbody) return;
 
@@ -307,10 +296,7 @@ function renderTradesTable(filtersOverride = {}) {
       ? '<span class="badge badge-profit">▲ Long</span>'
       : '<span class="badge badge-loss">▼ Short</span>';
 
-    const stars = trade.quality
-      ? '★'.repeat(trade.quality) + '☆'.repeat(5 - trade.quality)
-      : '—';
-
+    const stars    = trade.quality ? '★'.repeat(trade.quality) + '☆'.repeat(5 - trade.quality) : '—';
     const initials = trade.symbol.slice(0, 2).toUpperCase();
 
     return `
@@ -344,14 +330,22 @@ function renderTradesTable(filtersOverride = {}) {
   }).join('');
 }
 
-/* ── INIT JOURNAL PAGE ── */
-if (document.getElementById('tradesBody')) {
-  renderTradesTable();
+/* ── GET ACTIVE FILTERS ── */
+function getActiveFilters() {
+  const selects = document.querySelectorAll('.filter-bar .form-select');
+  const dates   = document.querySelectorAll('.filter-bar input[type="date"]');
 
-  /* Search */
-  document.getElementById('tradeSearch')?.addEventListener('input', e => {
-    renderTradesTable({ search: e.target.value });
-  });
+  const filters = {
+    search:    document.getElementById('tradeSearch')?.value    || '',
+    direction: selects[0]?.value || '',
+    result:    selects[1]?.value || '',
+    strategy:  selects[2]?.value || '',
+    asset:     selects[3]?.value || '',
+    dateFrom:  dates[0]?.value   || '',
+    dateTo:    dates[1]?.value   || '',
+  };
+
+  renderTradesTable(filters);
 }
 
 /* ── RESET FILTERS ── */
@@ -368,36 +362,13 @@ function resetFilters() {
 if (document.getElementById('tradesBody')) {
   renderTradesTable();
 
-  /* Search */
-  document.getElementById('tradeSearch')?.addEventListener('input', e => {
-    getActiveFilters();
-  });
+  document.getElementById('tradeSearch')?.addEventListener('input', () => getActiveFilters());
 
-  /* Filter selects live change */
   document.querySelectorAll('.filter-bar .form-select').forEach(sel => {
     sel.addEventListener('change', () => getActiveFilters());
   });
 
-  /* Date filters */
   document.querySelectorAll('.filter-bar input[type="date"]').forEach(inp => {
     inp.addEventListener('change', () => getActiveFilters());
   });
-}
-
-/* ── GET ACTIVE FILTERS ── */
-function getActiveFilters() {
-  const selects = document.querySelectorAll('.filter-bar .form-select');
-  const dates   = document.querySelectorAll('.filter-bar input[type="date"]');
-
-  const filters = {
-    search:    document.getElementById('tradeSearch')?.value || '',
-    direction: selects[0]?.value || '',
-    result:    selects[1]?.value || '',
-    strategy:  selects[2]?.value || '',
-    asset:     selects[3]?.value || '',
-    dateFrom:  dates[0]?.value   || '',
-    dateTo:    dates[1]?.value   || '',
-  };
-
-  renderTradesTable(filters);
 }
