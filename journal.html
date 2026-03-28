@@ -225,15 +225,13 @@ function toggleSidebar() {
 <div class="card" style="padding:10px 16px;">
   <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
 
-    <!-- Direction -->
-    <select class="form-select" style="width:auto" onchange="getActiveFilters()">
+    <select id="fDirection" class="form-select" style="width:auto" onchange="getActiveFilters()">
       <option value="">All Directions</option>
       <option value="long">Long</option>
       <option value="short">Short</option>
     </select>
 
-    <!-- Result -->
-    <select class="form-select" style="width:auto" onchange="getActiveFilters()">
+    <select id="fResult" class="form-select" style="width:auto" onchange="getActiveFilters()">
       <option value="">All Results</option>
       <option value="win">Wins</option>
       <option value="loss">Losses</option>
@@ -241,8 +239,7 @@ function toggleSidebar() {
       <option value="open">Open</option>
     </select>
 
-    <!-- Strategy -->
-    <select class="form-select" style="width:auto" onchange="getActiveFilters()">
+    <select id="fStrategy" class="form-select" style="width:auto" onchange="getActiveFilters()">
       <option value="">All Strategies</option>
       <option value="Breakout">Breakout</option>
       <option value="Trend Following">Trend Following</option>
@@ -252,8 +249,7 @@ function toggleSidebar() {
       <option value="Swing Trade">Swing Trade</option>
     </select>
 
-    <!-- Asset -->
-    <select class="form-select" style="width:auto" onchange="getActiveFilters()">
+    <select id="fAsset" class="form-select" style="width:auto" onchange="getActiveFilters()">
       <option value="">All Assets</option>
       <option value="Equity">Equity</option>
       <option value="ETF">ETF</option>
@@ -263,18 +259,14 @@ function toggleSidebar() {
       <option value="Crypto">Crypto</option>
     </select>
 
-    <!-- Divider -->
     <div style="width:1px;height:24px;background:var(--clr-border)"></div>
 
-    <!-- Date Range -->
-    <input type="date" class="form-input" style="width:150px" onchange="getActiveFilters()">
+    <input id="fDateFrom" type="date" class="form-input" style="width:150px" onchange="getActiveFilters()">
     <span style="font-size:var(--fs-sm);color:var(--clr-text-muted)">to</span>
-    <input type="date" class="form-input" style="width:150px" onchange="getActiveFilters()">
+    <input id="fDateTo" type="date" class="form-input" style="width:150px" onchange="getActiveFilters()">
 
-    <!-- Divider -->
     <div style="width:1px;height:24px;background:var(--clr-border)"></div>
 
-    <!-- Reset -->
     <button class="btn btn-ghost btn-sm" onclick="resetFilters()">↺ Reset</button>
 
   </div>
