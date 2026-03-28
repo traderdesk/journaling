@@ -15,7 +15,14 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
 </head>
-
+<script>
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const layout  = document.querySelector('.app-layout');
+  sidebar.classList.toggle('collapsed');
+  layout.classList.toggle('sidebar-collapsed');
+}
+</script>
 <body>
 <div class="app-layout">
 
